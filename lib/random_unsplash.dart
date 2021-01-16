@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'dart:io';
 
 class RandImg {
   final String url;
@@ -15,7 +16,7 @@ class RandImg {
 }
 
 Future<RandImg> fetchImg() async {
-  final response = await http.get("https://api.unsplash.com/photos/random");
+  final response = await http.get("https://api.unsplash.com/photos/random", headers: {HttpHeaders.authorizationHeader: "Client-ID OC_8GFmPsPUtKdd9yZeKgYhXSZJ3BSBfmyIFUbLaoQ8"});
 
   if (response.statusCode == 200) {
     return RandImg.fromJson(jsonDecode(response.body));
@@ -58,6 +59,7 @@ class _RandomUnsplashState extends State<RandomUnsplash> {
           OutlinedButton(
             onPressed: () {
               futureImg = fetchImg();
+              setState(() {});
             },
             child: Icon(Icons.refresh),
           )

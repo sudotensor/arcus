@@ -4,6 +4,13 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:io';
 
+class PrimaryColors {
+  final Color color1;
+  final Color color2;
+  final Color color3;
+  final Color color4;
+}
+
 class SearchImg {
   final String url;
 
@@ -67,8 +74,7 @@ class _SearchUnsplashState extends State<SearchUnsplash> {
               width: MediaQuery.of(context).size.width * 0.65,
               child: TextField(
                 controller: searchController,
-              )
-          ),
+              )),
           Container(
               width: MediaQuery.of(context).size.width * 0.25,
               child: ElevatedButton(
@@ -80,8 +86,7 @@ class _SearchUnsplashState extends State<SearchUnsplash> {
                   setState(() {});
                 },
                 child: Icon(Icons.search),
-              )
-          )
+              ))
         ]),
       ),
       Expanded(
@@ -106,9 +111,7 @@ class _SearchUnsplashState extends State<SearchUnsplash> {
                     ),
                   );
                 },
-              )
-          )
-      )
+              )))
     ]);
   }
 }

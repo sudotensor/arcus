@@ -16,7 +16,11 @@ class RandImg {
 }
 
 Future<RandImg> fetchImg() async {
-  final response = await http.get("https://api.unsplash.com/photos/random", headers: {HttpHeaders.authorizationHeader: "Client-ID OC_8GFmPsPUtKdd9yZeKgYhXSZJ3BSBfmyIFUbLaoQ8"});
+  final response =
+      await http.get("https://api.unsplash.com/photos/random", headers: {
+    HttpHeaders.authorizationHeader:
+        "Client-ID OC_8GFmPsPUtKdd9yZeKgYhXSZJ3BSBfmyIFUbLaoQ8"
+  });
 
   if (response.statusCode == 200) {
     return RandImg.fromJson(jsonDecode(response.body));
@@ -34,12 +38,6 @@ class _RandomUnsplashState extends State<RandomUnsplash> {
   Future<RandImg> futureImg;
 
   @override
-  void initState() {
-    super.initState();
-    futureImg = fetchImg();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(16.0),
@@ -48,7 +46,7 @@ class _RandomUnsplashState extends State<RandomUnsplash> {
           FutureBuilder<RandImg>(
             future: futureImg,
             builder: (context, snapshot) {
-              if(snapshot.hasData) {
+              if (snapshot.hasData) {
                 return Image.network(snapshot.data.url);
               } else if (snapshot.hasError) {
                 return Text('${snapshot.error}');

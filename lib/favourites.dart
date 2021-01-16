@@ -15,11 +15,19 @@ class _FavouritesState extends State<Favourites> {
         itemCount: favourites.length,
         itemBuilder: (BuildContext context, int index) {
           return Container(
-            height: 50,
+            height: 70,
             color: Colors.white,
             child: Align(
                 alignment: Alignment(-0.9, 0.0),
-                child: Text('${favourites[index]}'),
+                child: Row(
+                  children: <Widget> [
+                    Text('${favourites[index]}'),
+                    Icon(Icons.crop_square_sharp),
+                    Icon(Icons.crop_square_sharp),
+                    Icon(Icons.crop_square_sharp),
+                    Icon(Icons.crop_square_sharp),
+                  ]
+                )
             ),
           );
         },

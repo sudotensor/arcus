@@ -4,13 +4,6 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:io';
 
-class PrimaryColors {
-  final Color color1;
-  final Color color2;
-  final Color color3;
-  final Color color4;
-}
-
 class SearchImg {
   final String url;
 

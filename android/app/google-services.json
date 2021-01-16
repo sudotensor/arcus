@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "75894261357",
+    "project_id": "arcus-301911",
+    "storage_bucket": "arcus-301911.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:75894261357:android:1ceb49214f93689b90a164",
+        "android_client_info": {
+          "package_name": "com.example.arcus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "75894261357-vi0tkk9db3er98d6dsfuhajrtat7kq4q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGo5QoBTQW2JitRT3d_Zaxy3Nge1dpj1U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "75894261357-vi0tkk9db3er98d6dsfuhajrtat7kq4q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

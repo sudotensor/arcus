@@ -20,7 +20,7 @@ class MainPage extends StatelessWidget {
                 body: TabBarView (
                     children: [
                       LocalImagePicker(),
-                      Text('Nothing to see here....'),
+                      Text('Nothing to see here....'), // Insert future widgets here
                     ]
                 )
             )

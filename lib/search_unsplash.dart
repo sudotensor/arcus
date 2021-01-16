@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -54,27 +55,34 @@ class _SearchUnsplashState extends State<SearchUnsplash> {
         searchImgs.add(null);
       }
     }
-    for (var i = 0; i < _numImgs; i++) {
-      searchImgs[i] = fetchImg(searchTerm, i);
-    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Column(children: <Widget>[
-      Row(children: <Widget>[
-        TextFormField(
-          controller: searchController,
+      Container(
+        padding: EdgeInsets.all(16.0),
+        child: Row(children: <Widget>[
+          Container(width: MediaQuery.of(context).size.width*0.65, child: TextField(
+            controller: searchController,
+          )),
+          Container(width: MediaQuery.of(context).size.width*0.25, child: ElevatedButton(
+            onPressed: () {
+              searchTerm = searchController.text;
+              for (var i = 0; i < _numImgs; i++) {
+                searchImgs[i] = fetchImg(searchTerm, i);
+              }
+              setState(() {});
+            },
+            child: Icon(Icons.search),
+          ))]
         ),
-        ElevatedButton(
-          onPressed: () {
-            searchTerm = searchController.text;
-            setState(() {});
-          },
-          child: Icon(Icons.search),
-        )
-      ]),
-      ListView.builder(
+      ),
+      Expanded(
+      child: SizedBox(
+        height: 500,
+      child: ListView.builder(
+        scrollDirection: Axis.vertical,
         padding: EdgeInsets.all(16.0),
         itemCount: _numImgs,
         itemBuilder: (BuildContext context, int index) {
@@ -92,7 +100,8 @@ class _SearchUnsplashState extends State<SearchUnsplash> {
             ),
           );
         },
-      )
+      )))
     ]);
   }
 }
+

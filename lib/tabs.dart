@@ -2,19 +2,21 @@ import 'package:flutter/material.dart';
 import './local_image_picker.dart';
 import './favourites.dart';
 import './random_unsplash.dart';
+import './search_unsplash.dart';
 
 class MainPage extends StatelessWidget {
   @override
   Widget build (BuildContext context) {
     return MaterialApp(
         home: DefaultTabController(
-            length: 3,
+            length: 4,
             child: Scaffold(
                 appBar: AppBar(
                     bottom: TabBar(
                         tabs: [
                           Tab(icon: Icon(Icons.camera_alt_rounded)),
                           Tab(icon: Icon(Icons.settings)),
+                          Tab(icon: Icon(Icons.search)),
                           Tab(icon: Icon(Icons.favorite)),
                         ]
                     ),
@@ -24,6 +26,7 @@ class MainPage extends StatelessWidget {
                     children: [
                       LocalImagePicker(),
                       RandomUnsplash(),
+                      SearchUnsplash(),
                       Favourites(),
                     ]
                 )

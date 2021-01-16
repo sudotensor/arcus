@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+
 import './local_image_picker.dart';
 import './favourites.dart';
 import './random_unsplash.dart';
 import './search_unsplash.dart';
 
-class MainPage extends StatelessWidget {
+class MainPage extends StatefulWidget {
+  @override
+  _MainPageState createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
   @override
   Widget build (BuildContext context) {
     return MaterialApp(

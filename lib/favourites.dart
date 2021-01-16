@@ -1,6 +1,5 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 class Favourites extends StatefulWidget {
   @override
@@ -8,6 +7,7 @@ class Favourites extends StatefulWidget {
 }
 
 class _FavouritesState extends State<Favourites> {
+
   List<_MyPalette> palettes = <_MyPalette>[
     _MyPalette('Palette1', randomColor(), randomColor(), randomColor(), randomColor()),
     _MyPalette('Palette2', randomColor(), randomColor(), randomColor(), randomColor()),
@@ -62,7 +62,7 @@ class _FavouritesState extends State<Favourites> {
   }
 
   // Function that removes a selected palette
- void _removePalette (index) {
+  void _removePalette (index) {
     setState((){
       palettes.removeAt(index);
     });
@@ -90,6 +90,7 @@ class Box extends StatelessWidget {
   }
 }
 
+// Palette class with 1 name prop and 4 color props
 class _MyPalette {
   const _MyPalette(this.name, this.color1, this.color2, this.color3, this.color4);
 
@@ -99,7 +100,6 @@ class _MyPalette {
   final Color color3;
   final Color color4;
 }
-
 //GENERATE RANDOM COLORS FOR PLACEHOLDER PALETTES
 Color randomColor () {
   Random random = new Random();

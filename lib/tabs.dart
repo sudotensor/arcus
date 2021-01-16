@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import './local_image_picker.dart';
 import './favourites.dart';
+<<<<<<< HEAD
 import './random_unsplash.dart';
+=======
+import 'favourites.dart';
+>>>>>>> ddb219543d456b65c148c703223c40e54ac7fd9a
 
 class MainPage extends StatelessWidget {
   @override

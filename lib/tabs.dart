@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './local_image_picker.dart';
+import './favourites.dart';
 
 class MainPage extends StatelessWidget {
   @override
@@ -11,8 +12,8 @@ class MainPage extends StatelessWidget {
                 appBar: AppBar(
                     bottom: TabBar(
                         tabs: [
-                          Tab(icon: Icon(Icons.settings)),
-                          Tab(icon: Icon(Icons.settings)),
+                          Tab(icon: Icon(Icons.camera_alt_rounded)),
+                          Tab(icon: Icon(Icons.favorite)),
                         ]
                     ),
                     title: Text('Arcus')
@@ -20,7 +21,7 @@ class MainPage extends StatelessWidget {
                 body: TabBarView (
                     children: [
                       LocalImagePicker(),
-                      Text('Nothing to see here....'), // Insert future widgets here
+                      Favourites(),
                     ]
                 )
             )

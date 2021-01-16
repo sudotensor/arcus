@@ -24,10 +24,10 @@ class PrimaryColors {
 }
 
 Future<PrimaryColors> fetchPalette(var imageUri) async {
-  final body = {"requests" : [{"image" : {"source" : {"gcsImageUri" : "{$imageUri}"}}, "features" : [{"maxResults" : 4, "type" : "IMAGE_PROPERTIES"},]}]};
-  final token = "ya29.c.Kp0B7gdXr6Ss11wfBLrWjOhmeOszRW68xeqIi3eqmYPvyhhtUNHrTS4158aXwMUJqYKd3aExagBvkyeHqG6w1ztQFwr3fnvRGfQoiOYH1vUMYg3_9xevU4yIPSXau6C2-JvpeUVQEWhBCGiIzpWeSIwqtOGyR51_ot6kY0El5m4dTdxBTsciM14SZB5-NK6PrbK_3m0zf9wMiBThsRMLbA";
-  final headers = {"Content-Type" : "application/json", "Authorization" : "Bearer {$token}"};
-  final response = await http.post("https://vision.googleapis.com/v1/images:annotate", body: body, headers: headers);
+  final body = {"requests" : [{"image" : {"source" : {"imageUri" : "$imageUri"}}, "features" : [{"maxResults" : 4, "type" : "IMAGE_PROPERTIES"},]}]};
+  final token = "ya29.c.Kp0B7ge9g0FPgG0mVgrmpohLJ5Digdu_Sz_bwu_OvE7yYYNb_Rjgb45FZsLEDo-cAnyPhm70FI68iAcB3z9KU7vddboaxZij9cFyvDEuDQ51XtzOFQInKCt2IF1rcn2yL2smb0uA_BInAOdmbcRInfRYyoGbWHHh_E104WeRsoYfWw81Sfb1aubJ4ktxRhhRxDvaschlc7FbDFdYC4eZpg";
+  final headers = {"Content-Type": "application/json", "Authorization" : "Bearer $token"};
+  final response = await http.post("https://vision.googleapis.com/v1/images:annotate", body: jsonEncode(body), headers: headers);
 
   if (response.statusCode == 200) {
     return PrimaryColors.fromJson(jsonDecode(response.body));

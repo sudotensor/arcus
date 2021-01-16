@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class Favourites extends StatefulWidget {
@@ -7,6 +9,7 @@ class Favourites extends StatefulWidget {
 
 class _FavouritesState extends State<Favourites> {
   final List<String> favourites = <String>['Palette 1', 'Palette 2', 'Palette 3', 'Palette 4'];
+  Random random = new Random(); //GENERATE RANDOM COLORS FOR PLACEHOLDER PALETTES
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +25,10 @@ class _FavouritesState extends State<Favourites> {
                 child: Row(
                   children: <Widget> [
                     Text('${favourites[index]}'),
-                    Icon(Icons.crop_square_sharp),
-                    Icon(Icons.crop_square_sharp),
-                    Icon(Icons.crop_square_sharp),
-                    Icon(Icons.crop_square_sharp),
+                    Icon(Icons.brightness_1, color: Color((random.nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0)),
+                    Icon(Icons.brightness_1, color: Color((random.nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0)),
+                    Icon(Icons.brightness_1, color: Color((random.nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0)),
+                    Icon(Icons.brightness_1, color: Color((random.nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0)),
                   ]
                 )
             ),

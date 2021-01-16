@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class Favourites extends StatefulWidget {
@@ -6,8 +8,11 @@ class Favourites extends StatefulWidget {
 }
 
 class _FavouritesState extends State<Favourites> {
-  static const List<_MyPalette> palettes = const <_MyPalette>[
-    _MyPalette('Palette1', const Color(0xFFFFC100), const Color(0xFF91FAFF), const Color(0xFF00BCFF), const Color(0xFF009BEE)),
+  List<_MyPalette> palettes = <_MyPalette>[
+    _MyPalette('Palette1', randomColor(), randomColor(), randomColor(), randomColor()),
+    _MyPalette('Palette2', randomColor(), randomColor(), randomColor(), randomColor()),
+    _MyPalette('Palette3', randomColor(), randomColor(), randomColor(), randomColor()),
+    _MyPalette('Palette4', randomColor(), randomColor(), randomColor(), randomColor()),
   ];
 
   @override
@@ -71,4 +76,9 @@ class _MyPalette {
   final Color color2;
   final Color color3;
   final Color color4;
+}
+
+Color randomColor () {
+  Random random = new Random(); //GENERATE RANDOM COLORS FOR PLACEHOLDER PALETTES
+  return Color((random.nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0);
 }

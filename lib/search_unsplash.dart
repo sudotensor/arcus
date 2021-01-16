@@ -20,7 +20,7 @@ Future<SearchImg> fetchImg(var search, var i) async {
   final response = await http
       .get("https://api.unsplash.com/search/photos?query={$search}", headers: {
     HttpHeaders.authorizationHeader:
-        "Client-ID 7kXNn32J4W0djMR3eCOr96yVet3FTKw7Pl3GRk8SIeA"
+        "Client-ID OC_8GFmPsPUtKdd9yZeKgYhXSZJ3BSBfmyIFUbLaoQ8"
   });
 
   if (response.statusCode == 200) {
@@ -37,7 +37,7 @@ class SearchUnsplash extends StatefulWidget {
 
 class _SearchUnsplashState extends State<SearchUnsplash> {
   List<Future<SearchImg>> searchImgs = <Future<SearchImg>>[];
-  final int _numImgs = 10;
+  final int _numImgs = 5;
   var searchTerm = "";
   final searchController = TextEditingController();
 
@@ -63,45 +63,52 @@ class _SearchUnsplashState extends State<SearchUnsplash> {
       Container(
         padding: EdgeInsets.all(16.0),
         child: Row(children: <Widget>[
-          Container(width: MediaQuery.of(context).size.width*0.65, child: TextField(
-            controller: searchController,
-          )),
-          Container(width: MediaQuery.of(context).size.width*0.25, child: ElevatedButton(
-            onPressed: () {
-              searchTerm = searchController.text;
-              for (var i = 0; i < _numImgs; i++) {
-                searchImgs[i] = fetchImg(searchTerm, i);
-              }
-              setState(() {});
-            },
-            child: Icon(Icons.search),
-          ))]
-        ),
+          Container(
+              width: MediaQuery.of(context).size.width * 0.65,
+              child: TextField(
+                controller: searchController,
+              )
+          ),
+          Container(
+              width: MediaQuery.of(context).size.width * 0.25,
+              child: ElevatedButton(
+                onPressed: () {
+                  searchTerm = searchController.text;
+                  for (var i = 0; i < _numImgs; i++) {
+                    searchImgs[i] = fetchImg(searchTerm, i);
+                  }
+                  setState(() {});
+                },
+                child: Icon(Icons.search),
+              )
+          )
+        ]),
       ),
       Expanded(
-      child: SizedBox(
-        height: 500,
-      child: ListView.builder(
-        scrollDirection: Axis.vertical,
-        padding: EdgeInsets.all(16.0),
-        itemCount: _numImgs,
-        itemBuilder: (BuildContext context, int index) {
-          return Container(
-            child: FutureBuilder<SearchImg>(
-              future: searchImgs[index],
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return Image.network(snapshot.data.url);
-                } else if (snapshot.hasError) {
-                  return Text('${snapshot.error}');
-                }
-                return CircularProgressIndicator();
-              },
-            ),
-          );
-        },
-      )))
+          child: SizedBox(
+              height: 500,
+              child: ListView.builder(
+                scrollDirection: Axis.vertical,
+                padding: EdgeInsets.all(16.0),
+                itemCount: _numImgs,
+                itemBuilder: (BuildContext context, int index) {
+                  return Container(
+                    child: FutureBuilder<SearchImg>(
+                      future: searchImgs[index],
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return Image.network(snapshot.data.url);
+                        } else if (snapshot.hasError) {
+                          return Text('${snapshot.error}');
+                        }
+                        return CircularProgressIndicator();
+                      },
+                    ),
+                  );
+                },
+              )
+          )
+      )
     ]);
   }
 }
-

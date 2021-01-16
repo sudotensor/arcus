@@ -21,33 +21,55 @@ class _FavouritesState extends State<Favourites> {
         padding: const EdgeInsets.all(8),
         itemCount: palettes.length,
         itemBuilder: (BuildContext context, int index) {
-          return Container(
-            height: 70,
-            color: Colors.white,
-            child: Align(
-                alignment: Alignment(0.0, 0.0),
-                child: Row(
-                  children: <Widget> [
-                    Padding(padding: EdgeInsets.all(8.0)),
-                    Text('${palettes[index].name}'),
-                    Spacer(),
-                    Box(palettes[index].color1),
-                    Padding(padding: EdgeInsets.all(8.0)),
-                    Box(palettes[index].color2),
-                    Padding(padding: EdgeInsets.all(8.0)),
-                    Box(palettes[index].color3),
-                    Padding(padding: EdgeInsets.all(8.0)),
-                    Box(palettes[index].color4),
-                    Padding(padding: EdgeInsets.all(8.0)),
-                  ]
-                )
-            ),
+          return InkWell (
+            onTap: () {
+              // do something
+            },
+            child: Container(
+              height: 70,
+              color: Colors.white,
+              child: Align(
+                  alignment: Alignment(0.0, 0.0),
+                  child: Row(
+                      children: <Widget> [
+                        Padding(padding: EdgeInsets.all(8.0)),
+                        Text('${palettes[index].name}'),
+                        Spacer(),
+                        Box(palettes[index].color1),
+                        Padding(padding: EdgeInsets.all(8.0)),
+                        Box(palettes[index].color2),
+                        Padding(padding: EdgeInsets.all(8.0)),
+                        Box(palettes[index].color3),
+                        Padding(padding: EdgeInsets.all(8.0)),
+                        Box(palettes[index].color4),
+                        Container(
+                          child: IconButton(
+                            padding: EdgeInsets.all(0),
+                            alignment: Alignment.centerRight,
+                            icon: (Icon(Icons.cancel)),
+                            color: Colors.black,
+                            onPressed: () => _removePalette(index),
+                          ),
+                        ),
+                        Padding(padding: EdgeInsets.all(8.0)),
+                      ]
+                  )
+              ),
+            )
           );
         },
     );
   }
+
+  // Function that removes a selected palette
+ void _removePalette (index) {
+    setState((){
+      palettes.removeAt(index);
+    });
+  }
 }
 
+// Prints a box widget according to the color passed to it
 class Box extends StatelessWidget {
   Box(this.color);
 
@@ -78,7 +100,8 @@ class _MyPalette {
   final Color color4;
 }
 
+//GENERATE RANDOM COLORS FOR PLACEHOLDER PALETTES
 Color randomColor () {
-  Random random = new Random(); //GENERATE RANDOM COLORS FOR PLACEHOLDER PALETTES
+  Random random = new Random();
   return Color((random.nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0);
 }

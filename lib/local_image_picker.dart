@@ -62,7 +62,7 @@ class GalleryAccessState extends State<GalleryAccess> {
                   children: <Widget>[
                     Padding (padding: EdgeInsets.all(15.0)),
                     Container(
-                      height: 140.0,
+                      height: 100.0,
                       width: 70.0,
                       color: Colors.transparent,
                       child: Container(
@@ -73,9 +73,8 @@ class GalleryAccessState extends State<GalleryAccess> {
                       )
                     )
                     ),
-                    Padding (padding: EdgeInsets.all(10.0)),
                     Container(
-                        height: 140.0,
+                        height: 100.0,
                         width: 70.0,
                         color: Colors.transparent,
                         child: Container(
@@ -86,9 +85,8 @@ class GalleryAccessState extends State<GalleryAccess> {
                             )
                         )
                     ),
-                    Padding (padding: EdgeInsets.all(10.0)),
                     Container(
-                        height: 140.0,
+                        height: 100.0,
                         width: 70.0,
                         color: Colors.transparent,
                         child: Container(
@@ -99,9 +97,8 @@ class GalleryAccessState extends State<GalleryAccess> {
                             )
                         )
                     ),
-                    Padding (padding: EdgeInsets.all(10.0)),
                     Container(
-                        height: 140.0,
+                        height: 100.0,
                         width: 70.0,
                         color: Colors.transparent,
                         child: Container(
@@ -112,7 +109,7 @@ class GalleryAccessState extends State<GalleryAccess> {
                             )
                         )
                     ),
-                    Padding (padding: EdgeInsets.all(16.0)),
+                    Padding (padding: EdgeInsets.all(15.0)),
                   ]
                 ),
                 Spacer(),
@@ -136,7 +133,6 @@ class GalleryAccessState extends State<GalleryAccess> {
                             ),
                           ),
                       ),
-                      Padding (padding: EdgeInsets.all(10.0)),
                       Container(
                           height: 30.0,
                           width: 70.0,
@@ -153,7 +149,6 @@ class GalleryAccessState extends State<GalleryAccess> {
                             ),
                           )
                       ),
-                      Padding (padding: EdgeInsets.all(10.0)),
                       Container(
                           height: 30.0,
                           width: 70.0,
@@ -170,7 +165,6 @@ class GalleryAccessState extends State<GalleryAccess> {
                             ),
                           )
                       ),
-                      Padding (padding: EdgeInsets.all(10.0)),
                       Container(
                           height: 30.0,
                           width: 70.0,
@@ -187,7 +181,7 @@ class GalleryAccessState extends State<GalleryAccess> {
                             ),
                           )
                       ),
-                      Padding (padding: EdgeInsets.all(16.0)),
+                      Padding (padding: EdgeInsets.all(15.0)),
                     ]
                 ),
                 Spacer(),

@@ -77,7 +77,6 @@ class _RandomUnsplashState extends State<RandomUnsplash> {
     return Container(
       padding: EdgeInsets.all(16.0),
       child: Column(
-        // child: Image.asset('assets/undraw_searching_p5ux'),
         children: [
           Column(
             children: [
@@ -89,7 +88,12 @@ class _RandomUnsplashState extends State<RandomUnsplash> {
                         child: Image.network(futureImg.url, fit: BoxFit.fitHeight)
                       );
                     }
-                    return Text('');
+                    return Center (
+                        child: new Container(
+                          height: 300.0,
+                          child: Image.asset('assets/undraw_searching_p5ux.png'),
+                        )
+                    );
                   }
               ),
             ],

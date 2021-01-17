@@ -14,15 +14,37 @@ class Favourites extends StatefulWidget {
 }
 
 class _FavouritesState extends State<Favourites> {
-  List<MyPalette> palettes = <MyPalette>[];
+  List<MyPalette> paletteList = [];
 
-  Future<List<PrimaryColors>>getPrimaryColors() {
+  status() async {
+    if(paletteList.length > 1) {
+      print(paletteList.length);
+      setState(() {});
+    } else {
+      getPrimaryColors();
+    }
+  }
 
+  getPrimaryColors() async {
+    final palettesArr = await palettes();
+    if(paletteList.length < 1) {
+      for (var i = 0; i < palettesArr.length; i++) {
+        paletteList.add(palettesArr[i]);
+      }
+    }
+    status();
+    return null;
+  }
+
+  nullify() {
+    paletteList = [];
   }
 
   @override
   void initState() {
     super.initState();
+    print("here yo");
+    nullify();
     getPrimaryColors();
   }
 
@@ -30,13 +52,13 @@ class _FavouritesState extends State<Favourites> {
   Widget build(BuildContext context) {
     return ListView.builder(
         padding: const EdgeInsets.all(8),
-        itemCount: palettes.length,
+        itemCount: paletteList.length > 0 ? paletteList.length : 0,
         itemBuilder: (BuildContext context, int index) {
           return InkWell (
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => PopUpScreen(palettes, index)),
+                MaterialPageRoute(builder: (context) => PopUpScreen(paletteList, index)),
               );
             },
             child: Container(
@@ -55,7 +77,7 @@ class _FavouritesState extends State<Favourites> {
                       Row(
                         children: <Widget> [
                           Padding(padding: EdgeInsets.all(8.0)),
-                          Text('${palettes[index].name}', style: TextStyle(decoration: TextDecoration.underline, fontSize: 20.0,)),
+                          Text('${paletteList[index].name}', style: TextStyle(decoration: TextDecoration.underline, fontSize: 20.0,)),
                           Spacer(),
                           Container(
                             child: IconButton(
@@ -71,13 +93,13 @@ class _FavouritesState extends State<Favourites> {
                       Row(
                         children: <Widget> [
                           Spacer(),
-                          Box(palettes[index].color1),
+                          Box(paletteList[index].color1),
                           Spacer(),
-                          Box(palettes[index].color2),
+                          Box(paletteList[index].color2),
                           Spacer(),
-                          Box(palettes[index].color3),
+                          Box(paletteList[index].color3),
                           Spacer(),
-                          Box(palettes[index].color4),
+                          Box(paletteList[index].color4),
                           Spacer(),
                         ]
                       ),
@@ -93,7 +115,7 @@ class _FavouritesState extends State<Favourites> {
 // Function that removes a selected palette
   void _removePalette (index) {
     setState((){
-      palettes.removeAt(index);
+      paletteList.removeAt(index);
     });
   }
 }
@@ -281,10 +303,4 @@ Future<List<MyPalette>> palettes() async {
         Color(int.parse(maps[i]["color3"].split('(0x')[1].split(')')[0], radix: 16)),
         Color(int.parse(maps[i]["color4"].split('(0x')[1].split(')')[0], radix: 16)));
   });
-}
-
-//GENERATE RANDOM COLORS FOR PLACEHOLDER PALETTES
-Color randomColor () {
-  Random random = new Random();
-  return Color((random.nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0);
 }

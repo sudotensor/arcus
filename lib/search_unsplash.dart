@@ -23,7 +23,7 @@ Future<SearchImg> fetchImg(var search, var i) async {
   final response = await http
       .get("https://api.unsplash.com/search/photos?query={$search}", headers: {
     HttpHeaders.authorizationHeader:
-        "Client-ID 7kXNn32J4W0djMR3eCOr96yVet3FTKw7Pl3GRk8SIeA"
+        "Client-ID OC_8GFmPsPUtKdd9yZeKgYhXSZJ3BSBfmyIFUbLaoQ8"
   });
 
   if (response.statusCode == 200) {

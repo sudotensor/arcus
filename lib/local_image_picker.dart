@@ -247,7 +247,7 @@ class GalleryAccessState extends State<GalleryAccess> {
                         minWidth: double.infinity,
                         child: new FlatButton(
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0)),
+                              borderRadius: BorderRadius.circular(12.0)),
                           color: Colors.black,
                           child: new Text(
                             'Select Image from Gallery',
@@ -258,6 +258,7 @@ class GalleryAccessState extends State<GalleryAccess> {
                           ),
                           onPressed: getImage,
                         ))),
+                Padding(padding: EdgeInsets.all(8.0)),
               ],
             ),
           );

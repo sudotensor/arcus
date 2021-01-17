@@ -23,7 +23,7 @@ Future<SearchImg> fetchImg(var search, var i) async {
   final response = await http
       .get("https://api.unsplash.com/search/photos?query={$search}", headers: {
     HttpHeaders.authorizationHeader:
-        "Client-ID 7kXNn32J4W0djMR3eCOr96yVet3FTKw7Pl3GRk8SIeA"
+        "Client-ID ILl4MM3c5zfwnNYnzv1NHa0dXp9jqvpd8ADKhh1fYF4"
   });
 
   if (response.statusCode == 200) {
@@ -87,52 +87,87 @@ class _SearchUnsplashState extends State<SearchUnsplash> {
   Widget build(BuildContext context) {
     return Column(children: <Widget>[
       Container(
-        decoration: BoxDecoration (
+        padding: EdgeInsets.only(top: 8),
+        decoration: BoxDecoration(
           color: Colors.white,
         ),
-        padding: EdgeInsets.all(16.0),
         child: Row(children: <Widget>[
           Spacer(),
           Container(
-              width: MediaQuery.of(context).size.width * 0.65,
+              padding: EdgeInsets.only(right: 8, left: 8),
+              height: 36,
+              width: MediaQuery.of(context).size.width * 0.75,
               child: TextField(
-                controller: searchController,
-              )),
-          Padding(padding: EdgeInsets.symmetric(horizontal: 3.0)),
+                  controller: searchController,
+                  decoration: new InputDecoration(
+                    filled: true,
+                    hintText: 'Search...',
+                    fillColor: Colors.grey[100],
+                    contentPadding: EdgeInsets.only(
+                      bottom: 18, // HERE THE IMPORTANT PART
+                      left: 8,
+                    ),
+                    border: new OutlineInputBorder(
+                      borderRadius: const BorderRadius.all(
+                        const Radius.circular(8.0),
+                      ),
+                      borderSide: BorderSide(
+                        width: 0,
+                        style: BorderStyle.none,
+                      ),
+                    ),
+                  ))),
           Container(
+              padding: EdgeInsets.only(right: 8),
               width: MediaQuery.of(context).size.width * 0.20,
               child: FlatButton(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.0)),
+                color: Colors.black,
                 onPressed: () {
                   searchTerm = searchController.text;
-                  Scaffold.of(context).showSnackBar(
-                      SnackBar(content: Text("Loading Images...")));
+                  Scaffold.of(context).showSnackBar(SnackBar(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16.0)),
+                      backgroundColor: Colors.black,
+                      content: Container(
+                          height: 50, child: Text("Loading Images..."))));
                   getContent();
                 },
-                child: Icon(Icons.search, size: 50),
+                child: Icon(Icons.search, size: 24, color: Colors.white),
               )),
           Spacer(),
         ]),
       ),
       Expanded(
           child: Container(
-              decoration: BoxDecoration (
+              decoration: BoxDecoration(
                 color: Colors.white,
               ),
               height: 500,
               child: ListView.builder(
                 scrollDirection: Axis.vertical,
-                padding: EdgeInsets.all(16.0),
                 itemCount: numImgs,
                 itemBuilder: (BuildContext context, int index) {
                   return Column(
                     children: [
+                      Padding(padding: EdgeInsets.only(top: 12)),
                       searchImgs[index] != null
-                          ? Image.network(searchImgs[index].url)
+                          ? Container(
+                            padding: EdgeInsets.symmetric(horizontal: 16),
+                              child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image.network(
+                                searchImgs[index].url,
+                                fit: BoxFit.cover,
+                              ),
+                            ))
                           : SizedBox(
                               child: Shimmer.fromColors(
                                 baseColor: Colors.white,
                                 highlightColor: Colors.grey,
                                 child: Container(
+                                  padding: EdgeInsets.symmetric(horizontal: 16),
                                   child: Column(
                                     children: <Widget>[
                                       Container(
@@ -140,50 +175,64 @@ class _SearchUnsplashState extends State<SearchUnsplash> {
                                         width: 400,
                                         decoration: BoxDecoration(
                                           color: Colors.white.withOpacity(0.4),
+                                          borderRadius: BorderRadius.all(
+                                            Radius.circular(12),
+                                          ),
                                         ),
                                       ),
-                                      Padding(padding: EdgeInsets.all(8.0)),
+                                      Padding(padding: EdgeInsets.only(bottom: 12.0)),
                                     ],
                                   ),
                                 ),
                               ),
                             ),
                       searchImgs[index] != null
-                          ? FlatButton(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8.0)),
-                              color: Colors.black,
-                              child: new Text(
-                                'Create New Palette',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Colors.white.withOpacity(1),
-                                ),
-                              ),
-                              //onPressed: getImage,
-                              onPressed: () async {
-                                Scaffold.of(context).showSnackBar(SnackBar(
-                                    content: Text("Loading Palette...")));
-                                await getPrimaryColors(searchImgs[index]);
-                                if(primaryColors != null) {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            PalettePage(
-                                                colors: primaryColors.colors)),
-                                  );
-                                } else {
-                                  Scaffold.of(context).showSnackBar(SnackBar(
+                          ? SafeArea(
+                              minimum: EdgeInsets.symmetric(horizontal: 16),
+                              child: ButtonTheme(
+                                  minWidth: double.infinity,
+                                  child: FlatButton(
                                     shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0)),
-                          backgroundColor: Colors.black,
-                          content: Container(
-                              height: 50, 
-                                      child: Text("Image too big!"))));
-                                }
-                              },
-                            )
+                                        borderRadius:
+                                            BorderRadius.circular(8.0)),
+                                    color: Colors.black,
+                                    child: new Text(
+                                      'Create New Palette',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: Colors.white.withOpacity(1),
+                                      ),
+                                    ),
+                                    //onPressed: getImage,
+                                    onPressed: () async {
+                                      Scaffold.of(context).showSnackBar(
+                                          SnackBar(
+                                              content:
+                                                  Text("Loading Palette...")));
+                                      await getPrimaryColors(searchImgs[index]);
+                                      if (primaryColors != null) {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => PalettePage(
+                                                  colors:
+                                                      primaryColors.colors)),
+                                        );
+                                      } else {
+                                        Scaffold.of(context).showSnackBar(
+                                            SnackBar(
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0)),
+                                                backgroundColor: Colors.black,
+                                                content: Container(
+                                                    height: 50,
+                                                    child: Text(
+                                                        "Image too big!"))));
+                                      }
+                                    },
+                                  )))
                           : SizedBox(
                               child: Shimmer.fromColors(
                                 baseColor: Colors.white,
@@ -192,10 +241,14 @@ class _SearchUnsplashState extends State<SearchUnsplash> {
                                   child: Column(
                                     children: <Widget>[
                                       Container(
+                                        padding: EdgeInsets.symmetric(horizontal: 16),
                                         height: 150,
                                         width: 400,
                                         decoration: BoxDecoration(
                                           color: Colors.white.withOpacity(0.4),
+                                          borderRadius: BorderRadius.all(
+                                            Radius.circular(12),
+                                          ),
                                         ),
                                       ),
                                       Padding(padding: EdgeInsets.all(8.0)),

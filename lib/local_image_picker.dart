@@ -147,7 +147,7 @@ class GalleryAccessState extends State<GalleryAccess> {
                               ),
                               padding: EdgeInsets.symmetric(horizontal: 6),
                               child: FittedBox(
-                                child: Text('${primaryColors != null ? slice(slice('${ColorToHex(primaryColors.colors[0])}', 6), 1, -1) : ''}' , style: TextStyle(color: primaryColors != null ? Colors.black : Colors.transparent)),
+                                child: Text('${primaryColors != null ? slice(slice('${ColorToHex(primaryColors.colors[0])}', 6), 1, -1) : ' '}' , style: TextStyle(color: primaryColors != null ? Colors.black : Colors.transparent)),
                               ),
                             ),
                           )),
@@ -165,7 +165,7 @@ class GalleryAccessState extends State<GalleryAccess> {
                                 ),
                                 padding: EdgeInsets.symmetric(horizontal: 6),
                                 child: FittedBox(
-                                  child: Text('${primaryColors != null ? slice(slice('${ColorToHex(primaryColors.colors[1])}', 6), 1, -1) : ''}' , style: TextStyle(color: primaryColors != null ? Colors.black : Colors.transparent)),
+                                  child: Text('${primaryColors != null ? slice(slice('${ColorToHex(primaryColors.colors[1])}', 6), 1, -1) : ' '}' , style: TextStyle(color: primaryColors != null ? Colors.black : Colors.transparent)),
                                 ),
                               ))),
                       Flexible(
@@ -182,7 +182,7 @@ class GalleryAccessState extends State<GalleryAccess> {
                                 ),
                                 padding: EdgeInsets.symmetric(horizontal: 6),
                                 child: FittedBox(
-                                  child: Text('${primaryColors != null ? slice(slice('${ColorToHex(primaryColors.colors[2])}', 6), 1, -1) : ''}' , style: TextStyle(color: primaryColors != null ? Colors.black : Colors.transparent)),
+                                  child: Text('${primaryColors != null ? slice(slice('${ColorToHex(primaryColors.colors[2])}', 6), 1, -1) : ' '}' , style: TextStyle(color: primaryColors != null ? Colors.black : Colors.transparent)),
                                 ),
                               ))),
                       Flexible(
@@ -199,7 +199,7 @@ class GalleryAccessState extends State<GalleryAccess> {
                                 ),
                                 padding: EdgeInsets.symmetric(horizontal: 6),
                                 child: FittedBox(
-                                  child: Text('${primaryColors != null ? slice(slice('${ColorToHex(primaryColors.colors[3])}', 6), 1, -1) : ''}' , style: TextStyle(color: primaryColors != null ? Colors.black : Colors.transparent)),
+                                  child: Text('${primaryColors != null ? slice(slice('${ColorToHex(primaryColors.colors[3])}', 6), 1, -1) : ' '}' , style: TextStyle(color: primaryColors != null ? Colors.black : Colors.transparent)),
                                 ),
                               ))),
                       Padding(padding: EdgeInsets.symmetric(horizontal: 8.0)),

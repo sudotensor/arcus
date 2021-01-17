@@ -25,7 +25,7 @@ class PrimaryColors {
 
 Future<PrimaryColors> fetchPalette(var imageUri) async {
   final body = {"requests" : [{"image" : {"source" : {"imageUri" : "$imageUri"}}, "features" : [{"maxResults" : 4, "type" : "IMAGE_PROPERTIES"},]}]};
-  final token = "ya29.c.Kp0B7geKhdq3OSzfM_GBIl1E4F8LSwlFhfQDAzlM6D1_oROonyHmL7sGu7bmTXNGdS9Ef-XOD9qp6DH3ZnvrWCC-MzWLymgTNZ90r7nfP9esCajiQY2zrF_YPYe-5nu3P7sk5JaSa42Q_hbWfNWclCkzE608R0azYS0fnD08xPlcq2pbwJTMHE4z0iXMVdCRaDuhtNkS31Of17AgKNb8fA";
+  final token = "ya29.c.Kp0B7geI4WTlgVTjo-KLiJz52Q8J7gxn2qzKL8mQGdpOQjK6TPsa3MFRDlXfDLvnfmbSSk8h0GVN-Pmogs0PDNeI6g_IbBJSq22W54WCl1YqTpT1ELICLD5zI99cB0gO2qjWTHFeD6f5679EUwLE2lDrNJQr-1P4_28VGCRz_Bfp8YS18n_gkUO2zYmeaduJCxa4aWbSV96EFdAw31IDmA";
   final headers = {"Content-Type": "application/json", "Authorization" : "Bearer $token"};
   final response = await http.post("https://vision.googleapis.com/v1/images:annotate", body: jsonEncode(body), headers: headers);
 

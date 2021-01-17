@@ -88,10 +88,9 @@ class _RandomUnsplashState extends State<RandomUnsplash> {
           Row (
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                Padding (padding: EdgeInsets.all(15.0)),
                 Container(
-                    height: 100.0,
-                    width: 70.0,
+                    height: MediaQuery.of(context).size.height*0.1,
+                    width: MediaQuery.of(context).size.width*0.15,
                     color: Colors.transparent,
                     child: Container(
                         decoration: BoxDecoration(
@@ -102,8 +101,8 @@ class _RandomUnsplashState extends State<RandomUnsplash> {
                     )
                 ),
                 Container(
-                    height: 100.0,
-                    width: 70.0,
+                    height: MediaQuery.of(context).size.height*0.1,
+                    width: MediaQuery.of(context).size.width*0.15,
                     color: Colors.transparent,
                     child: Container(
                         decoration: BoxDecoration(
@@ -114,8 +113,8 @@ class _RandomUnsplashState extends State<RandomUnsplash> {
                     )
                 ),
                 Container(
-                    height: 100.0,
-                    width: 70.0,
+                    height: MediaQuery.of(context).size.height*0.1,
+                    width: MediaQuery.of(context).size.width*0.15,
                     color: Colors.transparent,
                     child: Container(
                         decoration: BoxDecoration(
@@ -126,8 +125,8 @@ class _RandomUnsplashState extends State<RandomUnsplash> {
                     )
                 ),
                 Container(
-                    height: 100.0,
-                    width: 70.0,
+                    height: MediaQuery.of(context).size.height*0.1,
+                    width: MediaQuery.of(context).size.width*0.15,
                     color: Colors.transparent,
                     child: Container(
                         decoration: BoxDecoration(
@@ -137,17 +136,14 @@ class _RandomUnsplashState extends State<RandomUnsplash> {
                         )
                     )
                 ),
-                Padding (padding: EdgeInsets.all(15.0)),
               ]
           ),
-          Padding (padding: EdgeInsets.all(10.0)),
           Row (
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                Padding (padding: EdgeInsets.all(15.0)),
                 Container(
-                  height: 30.0,
-                  width: 70.0,
+                  height: MediaQuery.of(context).size.height*0.1,
+                  width: MediaQuery.of(context).size.width*0.15,
                   color: Colors.transparent,
                   child: Container(
                     decoration: BoxDecoration(
@@ -168,8 +164,8 @@ class _RandomUnsplashState extends State<RandomUnsplash> {
                   ),
                 ),
                 Container(
-                    height: 30.0,
-                    width: 70.0,
+                    height: MediaQuery.of(context).size.height*0.1,
+                    width: MediaQuery.of(context).size.width*0.15,
                     color: Colors.transparent,
                     child: Container(
                       decoration: BoxDecoration(
@@ -190,8 +186,8 @@ class _RandomUnsplashState extends State<RandomUnsplash> {
                     )
                 ),
                 Container(
-                    height: 30.0,
-                    width: 70.0,
+                    height: MediaQuery.of(context).size.height*0.1,
+                    width: MediaQuery.of(context).size.width*0.15,
                     color: Colors.transparent,
                     child: Container(
                       decoration: BoxDecoration(
@@ -212,8 +208,8 @@ class _RandomUnsplashState extends State<RandomUnsplash> {
                     )
                 ),
                 Container(
-                    height: 30.0,
-                    width: 70.0,
+                    height: MediaQuery.of(context).size.height*0.1,
+                    width: MediaQuery.of(context).size.width*0.15,
                     color: Colors.transparent,
                     child: Container(
                       decoration: BoxDecoration(
@@ -233,10 +229,8 @@ class _RandomUnsplashState extends State<RandomUnsplash> {
                       ),
                     )
                 ),
-                Padding (padding: EdgeInsets.all(15.0)),
               ]
           ),
-          Padding (padding: EdgeInsets.all(15.0)),
           new ElevatedButton(
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all<Color>(Colors.lightBlue),
@@ -252,7 +246,6 @@ class _RandomUnsplashState extends State<RandomUnsplash> {
               getImgData();
             },
           ),
-          Padding (padding: EdgeInsets.all(20.0)),
         ],
       ),
     );

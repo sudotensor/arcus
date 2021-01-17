@@ -65,7 +65,13 @@ class GalleryAccessState extends State<GalleryAccess> {
                           child: Image.asset(
                               'assets/undraw_Organize_photos_re_ogcy.png'),
                         ))
-                      : Center(child: new Image.file(galleryFile)),
+                      : Center(
+                      child: SizedBox(
+                        width: 400.0,
+                        height: 400.0,
+                        child: Image.file(galleryFile),
+                      ),
+                  ),
                 ),
                 Text(
                   "Pick an image from your gallery\nto generate a palette!",
@@ -235,7 +241,6 @@ class GalleryAccessState extends State<GalleryAccess> {
                           },
                         ))
                 ),
-                Spacer(),
                 SafeArea(
                     minimum: EdgeInsets.symmetric(horizontal: 16),
                     child: ButtonTheme(

@@ -108,6 +108,12 @@ class _SearchUnsplashState extends State<SearchUnsplash> {
                                   ),
                                 ),
                                 //onPressed: getImage,
+                                onPressed: (){
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => PalettePage()),
+                                  );
+                                },
                               ),
                             ],
                           );
@@ -122,5 +128,31 @@ class _SearchUnsplashState extends State<SearchUnsplash> {
                 },
               )))
     ]);
+  }
+}
+
+class PalettePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Palette Page"),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
+          ),
+          child: new Text(
+            '                             Go Back                              ',
+            style: TextStyle(color: Colors.black.withOpacity(1),
+            ),
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
+    );
   }
 }

@@ -95,9 +95,12 @@ class _SearchUnsplashState extends State<SearchUnsplash> {
                       future: searchImgs[index],
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
-                          new ElevatedButton(
+                          return Column(
+                            children: [
+                            Image.network(snapshot.data.url),
+                            ElevatedButton(
                             style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all<Color>(Colors.pinkAccent[100]),
+                              backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
                             ),
                             child: new Text(
                               '                             Create New Palette                             ',
@@ -105,8 +108,10 @@ class _SearchUnsplashState extends State<SearchUnsplash> {
                               ),
                             ),
                             //onPressed: getImage,
+                          ),
+                            ],
                           );
-                          return Image.network(snapshot.data.url);
+
                         } else if (snapshot.hasError) {
                           return Text('${snapshot.error}');
                         }

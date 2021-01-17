@@ -37,8 +37,32 @@ class RandomUnsplash extends StatefulWidget {
 }
 
 class _RandomUnsplashState extends State<RandomUnsplash> {
-  Future<RandImg> futureImg;
-  Future<PrimaryColors> primaryColors;
+  RandImg futureImg;
+  PrimaryColors primaryColors;
+  var _primaryColorsLen = 4;
+
+  status() async {
+    if(futureImg != null && primaryColors != null) {
+      setState(() {});
+    } else {
+      status();
+    }
+    return null;
+  }
+
+  getImgData() async {
+    futureImg = await fetchImg();
+    primaryColors = await fetchPalette(futureImg.url);
+    status();
+    //setState(() {});
+    return null;
+  }
+
+  refreshVars() {
+    futureImg = null;
+    primaryColors = null;
+    return null;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,43 +70,35 @@ class _RandomUnsplashState extends State<RandomUnsplash> {
       padding: EdgeInsets.all(16.0),
       child: Column(
         children: [
-          FutureBuilder<RandImg>(
-            future: futureImg,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return Column(children: [
-                  Image.network(snapshot.data.url),
-                  FutureBuilder<PrimaryColors>(
-                    future: primaryColors,
-                    builder: (context, snapshot2) {
-                      print(snapshot2);
-                      if (snapshot2.hasData) {
-                        return ListView.builder(
-                          padding: EdgeInsets.all(16.0),
-                          itemCount: snapshot2.data.colors.length,
-                          itemBuilder: (BuildContext context, int i) {
-                            return Text(snapshot2.data.colors[i]);
-                          },
-                        );
-                      } else {
-                        return Text("No Color data");
-                      }
-                    },
-                  )
-                ]);
-              } else if (snapshot.hasError) {
-                return Text('${snapshot.error}');
+          Column(
+            children: [
+              new Builder(
+                  builder: (BuildContext context) {
+              if(futureImg != null) {
+                return Image.network(futureImg.url);
               }
-              return CircularProgressIndicator();
-            },
+              return Text("Click button to load image");
+            }
+            ),
+              ListView.builder(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                padding: EdgeInsets.all(4.0),
+                itemCount: _primaryColorsLen,
+                itemBuilder: (BuildContext context, int i) {
+                  if(primaryColors != null) {
+                    return Icon(Icons.circle, color: primaryColors.colors[i]);
+                  }
+                  return Text("");
+                },
+              )
+            ],
           ),
           OutlinedButton(
-            onPressed: () async {
-              futureImg = fetchImg();
-              futureImg.then((value) {
-                primaryColors = fetchPalette(value.url);
-              });
-              setState(() {});
+            onPressed: () {
+              refreshVars();
+              Scaffold.of(context).showSnackBar(SnackBar(content: Text("Loading Image...")));
+              getImgData();
             },
             child: Icon(Icons.refresh),
           )

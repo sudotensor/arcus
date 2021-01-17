@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:arcus/color_request.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -19,6 +20,12 @@ class GalleryAccess extends StatefulWidget {
 class GalleryAccessState extends State<GalleryAccess> {
   File galleryFile;
   final picker = ImagePicker();
+  PrimaryColors primaryColors;
+
+  getPalette() async {
+    primaryColors = await fetchLocalPalette(galleryFile);
+    return null;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +36,7 @@ class GalleryAccessState extends State<GalleryAccess> {
       setState(() {
         if (pickedFile != null) {
           galleryFile = File(pickedFile.path);
+          getPalette();
         } else {
           print('No image selected.');
         }

@@ -40,37 +40,51 @@ class _FavouritesState extends State<Favourites> {
               );
             },
             child: Container(
-              height: 70,
-              color: Colors.white,
+              height: 150,
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.black,
+                  width: 1,
+                ),
+              ),
               child: Align(
                   alignment: Alignment(0.0, 0.0),
-                  child: Row(
-                      children: <Widget> [
-                        Padding(padding: EdgeInsets.all(8.0)),
-                        Text('${palettes[index].name}'),
-                        Spacer(),
-                        Box(palettes[index].color1),
-                        Padding(padding: EdgeInsets.all(8.0)),
-                        Box(palettes[index].color2),
-                        Padding(padding: EdgeInsets.all(8.0)),
-                        Box(palettes[index].color3),
-                        Padding(padding: EdgeInsets.all(8.0)),
-                        Box(palettes[index].color4),
-                        Padding(padding: EdgeInsets.all(8.0)),
-                        Container(
-                          child: IconButton(
-                            padding: EdgeInsets.all(0),
-                            alignment: Alignment.centerRight,
-                            icon: (Icon(Icons.cancel)),
-                            color: Colors.black,
-                            onPressed: () => _removePalette(index),
+                  child: Column (
+                    children: <Widget>[
+                      Row(
+                        children: <Widget> [
+                          Padding(padding: EdgeInsets.all(8.0)),
+                          Text('${palettes[index].name}', style: TextStyle(decoration: TextDecoration.underline, fontSize: 20.0,)),
+                          Spacer(),
+                          Container(
+                            child: IconButton(
+                              alignment: Alignment.centerRight,
+                              icon: (Icon(Icons.cancel)),
+                              color: Colors.black,
+                              onPressed: () => _removePalette(index),
+                            ),
                           ),
-                        ),
-                        Padding(padding: EdgeInsets.all(8.0)),
-                      ]
-                  )
+                          Padding(padding: EdgeInsets.all(2.0)),
+                        ]
+                      ),
+                      Row(
+                        children: <Widget> [
+                          Spacer(),
+                          Box(palettes[index].color1),
+                          Spacer(),
+                          Box(palettes[index].color2),
+                          Spacer(),
+                          Box(palettes[index].color3),
+                          Spacer(),
+                          Box(palettes[index].color4),
+                          Spacer(),
+                        ]
+                      ),
+                    ],
+                  ),
               ),
-            )
+              margin: const EdgeInsets.all(5.0),
+            ),
           );
         },
     );
@@ -110,13 +124,13 @@ class Box extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 20,
-      width: 20.0,
+      height: 70.0,
+      width: 70.0,
       color: Colors.transparent,
       child: Container(
         decoration: BoxDecoration(
             color: color,
-            borderRadius: BorderRadius.all(Radius.circular(10.0))),
+            borderRadius: BorderRadius.all(Radius.circular(0))),
       ),
     );
   }

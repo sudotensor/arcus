@@ -22,9 +22,9 @@ class RandImg {
 
 Future<RandImg> fetchImg() async {
   final response =
-  await http.get("https://api.unsplash.com/photos/random", headers: {
+      await http.get("https://api.unsplash.com/photos/random", headers: {
     HttpHeaders.authorizationHeader:
-    "Client-ID 7kXNn32J4W0djMR3eCOr96yVet3FTKw7Pl3GRk8SIeA"
+        "Client-ID OC_8GFmPsPUtKdd9yZeKgYhXSZJ3BSBfmyIFUbLaoQ8"
   });
 
   if (response.statusCode == 200) {
@@ -47,12 +47,19 @@ class _RandomUnsplashState extends State<RandomUnsplash> {
   status() async {
     if (futureImg != null && primaryColors != null) {
       setState(() {});
-    } else if(primaryColors == null && futureImg != null) {
-      Scaffold.of(context).showSnackBar(SnackBar(content: Text("Image too large, reloading...")));
+    } else if (primaryColors == null && futureImg != null) {
+      Scaffold.of(context).showSnackBar(
+          SnackBar(
+            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.0)),
+                          backgroundColor: Colors.black,
+                          content: Container(
+                              height: 50, 
+            child: Text("Image too large, reloading..."))));
       refreshVars();
       getImgData();
       status();
-    }else {
+    } else {
       status();
     }
     return null;
@@ -78,229 +85,268 @@ class _RandomUnsplashState extends State<RandomUnsplash> {
       decoration: BoxDecoration(
         color: Colors.white,
       ),
-      padding: EdgeInsets.all(16.0),
       child: Column(
         children: [
           Column(
             children: [
-              new Builder(
-                  builder: (BuildContext context) {
-                    if(futureImg != null) {
-                      return Container(
-                        height: MediaQuery.of(context).size.height*0.5,
-                        child: Image.network(futureImg.url, fit: BoxFit.fitHeight)
-                      );
-                    }
-                    return Center (
+              Padding(padding: EdgeInsets.only(top: 8)),
+              new Builder(builder: (BuildContext context) {
+                if (futureImg != null) {
+                  return SizedBox(
+                      width: MediaQuery.of(context).size.width - 32,
+                      child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 16),
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                fit: BoxFit.cover,
+                                image: NetworkImage(futureImg.url)),
+                            color: Colors.grey[100],
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(12))),
+                        height: MediaQuery.of(context).size.height * 0.4,
+                      ));
+                }
+                return SizedBox(
+                    width: MediaQuery.of(context).size.width - 32,
+                    child: Center(
                         child: new Container(
-                          height: 300.0,
-                          child: Image.asset('assets/undraw_searching_p5ux.png'),
-                        )
-                    );
-                  }
-              ),
+                      padding: EdgeInsets.symmetric(horizontal: 16),
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                                fit: BoxFit.fitWidth,
+                                image: AssetImage('assets/undraw_searching_p5ux.png')),
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(Radius.circular(12))),
+                      height: 300.0,
+                    )));
+              }),
             ],
           ),
-          Spacer(),
-          Row (
+          if (futureImg == null)
+            Text(
+              "Tap on the button below\nto generate a palette!",
+              textAlign: TextAlign.center,
+            ),
+          if (futureImg != null) Padding(padding: EdgeInsets.only(top: 12)),
+          Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                Container(
-                    height: MediaQuery.of(context).size.height*0.1,
-                    width: MediaQuery.of(context).size.width*0.15,
-                    color: Colors.transparent,
+                Padding(padding: EdgeInsets.symmetric(horizontal: 6)),
+                Flexible(
+                    flex: 1,
                     child: Container(
-                        decoration: BoxDecoration(
-                          color: primaryColors != null ? primaryColors.colors[0] : Colors.transparent,
-                          borderRadius: BorderRadius.all(Radius.circular(10),
+                        padding: EdgeInsets.all(4),
+                        height: 120.0,
+                        color: Colors.transparent,
+                        child: Container(
+                            decoration: BoxDecoration(
+                          color: primaryColors != null
+                              ? primaryColors.colors[0]
+                              : Colors.transparent,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(12),
                           ),
-                        )
-                    )
-                ),
-                Container(
-                    height: MediaQuery.of(context).size.height*0.1,
-                    width: MediaQuery.of(context).size.width*0.15,
-                    color: Colors.transparent,
+                        )))),
+                Flexible(
+                    flex: 1,
                     child: Container(
-                        decoration: BoxDecoration(
-                          color: primaryColors != null ? primaryColors.colors[1] : Colors.transparent,
-                          borderRadius: BorderRadius.all(Radius.circular(10),
+                        padding: EdgeInsets.all(4),
+                        height: 120.0,
+                        color: Colors.transparent,
+                        child: Container(
+                            decoration: BoxDecoration(
+                          color: primaryColors != null
+                              ? primaryColors.colors[1]
+                              : Colors.transparent,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(12),
                           ),
-                        )
-                    )
-                ),
-                Container(
-                    height: MediaQuery.of(context).size.height*0.1,
-                    width: MediaQuery.of(context).size.width*0.15,
-                    color: Colors.transparent,
+                        )))),
+                Flexible(
+                    flex: 1,
                     child: Container(
-                        decoration: BoxDecoration(
-                          color: primaryColors != null ? primaryColors.colors[2] : Colors.transparent,
-                          borderRadius: BorderRadius.all(Radius.circular(10),
+                        padding: EdgeInsets.all(4),
+                        height: 120.0,
+                        color: Colors.transparent,
+                        child: Container(
+                            decoration: BoxDecoration(
+                          color: primaryColors != null
+                              ? primaryColors.colors[2]
+                              : Colors.transparent,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(12),
                           ),
-                        )
-                    )
-                ),
-                Container(
-                    height: MediaQuery.of(context).size.height*0.1,
-                    width: MediaQuery.of(context).size.width*0.15,
-                    color: Colors.transparent,
+                        )))),
+                Flexible(
+                    flex: 1,
                     child: Container(
-                        decoration: BoxDecoration(
-                          color: primaryColors != null ? primaryColors.colors[3] : Colors.transparent,
-                          borderRadius: BorderRadius.all(Radius.circular(10),
+                        padding: EdgeInsets.all(4),
+                        height: 120.0,
+                        color: Colors.transparent,
+                        child: Container(
+                            decoration: BoxDecoration(
+                          color: primaryColors != null
+                              ? primaryColors.colors[3]
+                              : Colors.transparent,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(12),
                           ),
-                        )
-                    )
-                ),
-              ]
-          ),
-          Row (
+                        )))),
+                Padding(padding: EdgeInsets.symmetric(horizontal: 6)),
+              ]),
+          Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                Container(
-                  height: MediaQuery.of(context).size.height*0.1,
-                  width: MediaQuery.of(context).size.width*0.15,
-                  color: Colors.transparent,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border(
-                        top: BorderSide(width: 1.0, color: Colors.transparent),
-                        left: BorderSide(width: 1.0, color: Colors.transparent),
-                        right: BorderSide(width: 1.0, color: Colors.transparent),
-                        bottom: BorderSide(width: 1.0, color: Colors.transparent),
-                      ),
+                Padding(padding: EdgeInsets.symmetric(horizontal: 8.0)),
+                Flexible(
+                    flex: 1,
+                    child: Container(
+                      height: 30.0,
+                      padding: EdgeInsets.symmetric(horizontal: 8),
                       color: Colors.transparent,
-                      borderRadius: BorderRadius.all(Radius.circular(10),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(10),
+                          ),
+                        ),
+                        padding: EdgeInsets.symmetric(horizontal: 8),
+                        child: FittedBox(
+                          child: Text(
+                              '${primaryColors != null ? slice(slice('${ColorToHex(primaryColors.colors[0])}', 6), 4, -1) : ' '}'.toUpperCase(),
+                              style: TextStyle(
+                                  color: primaryColors != null
+                                      ? Colors.black
+                                      : Colors.transparent)),
+                        ),
+                      ),
+                    )),
+                Flexible(
+                    flex: 1,
+                    child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 8),
+                        height: 30.0,
+                        color: Colors.transparent,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10),
+                            ),
+                          ),
+                          padding: EdgeInsets.symmetric(horizontal: 8),
+                          child: FittedBox(
+                            child: Text(
+                                '${primaryColors != null ? slice(slice('${ColorToHex(primaryColors.colors[1])}', 6), 4, -1) : ' '}'.toUpperCase(),
+                                style: TextStyle(
+                                    color: primaryColors != null
+                                        ? Colors.black
+                                        : Colors.transparent)),
+                          ),
+                        ))),
+                Flexible(
+                    flex: 1,
+                    child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 8),
+                        height: 30.0,
+                        color: Colors.transparent,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10),
+                            ),
+                          ),
+                          padding: EdgeInsets.symmetric(horizontal: 8),
+                          child: FittedBox(
+                            child: Text(
+                                '${primaryColors != null ? slice(slice('${ColorToHex(primaryColors.colors[2])}', 6), 4, -1) : ' '}'.toUpperCase(),
+                                style: TextStyle(
+                                    color: primaryColors != null
+                                        ? Colors.black
+                                        : Colors.transparent)),
+                          ),
+                        ))),
+                Flexible(
+                    flex: 1,
+                    child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 8),
+                        height: 30.0,
+                        color: Colors.transparent,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10),
+                            ),
+                          ),
+                          padding: EdgeInsets.symmetric(horizontal: 8),
+                          child: FittedBox(
+                            child: Text(
+                                '${primaryColors != null ? slice(slice('${ColorToHex(primaryColors.colors[3])}', 6), 4, -1) : ' '}'.toUpperCase(),
+                                style: TextStyle(
+                                    color: primaryColors != null
+                                        ? Colors.black
+                                        : Colors.transparent)),
+                          ),
+                        ))),
+                Padding(padding: EdgeInsets.symmetric(horizontal: 8.0)),
+              ]),
+          if (primaryColors != null)
+            SafeArea(
+                minimum: EdgeInsets.symmetric(horizontal: 16),
+                child: ButtonTheme(
+                    minWidth: double.infinity,
+                    child: new FlatButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0)),
+                      color: Colors.black,
+                      child: new Text(
+                        'Add to Favourites',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.white.withOpacity(1),
+                        ),
+                      ),
+                      onPressed: () {
+                        if (primaryColors != null) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    PalettePage(colors: primaryColors.colors)),
+                          );
+                        } else {
+                          Scaffold.of(context).showSnackBar(
+                              SnackBar(content: Text("No Image Selected!")));
+                        }
+                      },
+                    ))),
+                    Spacer(),
+          SafeArea(
+              minimum: EdgeInsets.symmetric(horizontal: 16),
+              child: ButtonTheme(
+                  minWidth: double.infinity,
+                  child: new FlatButton(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0)),
+                    color: Colors.black,
+                    child: new Text(
+                      'Generate Random Palette',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.white.withOpacity(1),
                       ),
                     ),
-                    padding: EdgeInsets.all(7.0),
-                    child: FittedBox(
-                      child: Text('${primaryColors != null ? slice(slice('${ColorToHex(primaryColors.colors[0])}', 6), 1, -1) : ''}' , style: TextStyle(color: primaryColors != null ? Colors.black : Colors.transparent)),
-                    ),
-                  ),
-                ),
-                Container(
-                    height: MediaQuery.of(context).size.height*0.1,
-                    width: MediaQuery.of(context).size.width*0.15,
-                    color: Colors.transparent,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border(
-                          top: BorderSide(width: 1.0, color: Colors.transparent),
-                          left: BorderSide(width: 1.0, color: Colors.transparent),
-                          right: BorderSide(width: 1.0, color: Colors.transparent),
-                          bottom: BorderSide(width: 1.0, color: Colors.transparent),
-                        ),
-                        color: Colors.transparent,
-                        borderRadius: BorderRadius.all(Radius.circular(10),
-                        ),
-                      ),
-                      padding: EdgeInsets.all(7.0),
-                      child: FittedBox(
-                        child: Text('${primaryColors != null ? slice(slice('${ColorToHex(primaryColors.colors[1])}', 6), 1, -1) : ''}' , style: TextStyle(color: primaryColors != null ? Colors.black : Colors.transparent)),
-                      ),
-                    )
-                ),
-                Container(
-                    height: MediaQuery.of(context).size.height*0.1,
-                    width: MediaQuery.of(context).size.width*0.15,
-                    color: Colors.transparent,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border(
-                          top: BorderSide(width: 1.0, color: Colors.transparent),
-                          left: BorderSide(width: 1.0, color: Colors.transparent),
-                          right: BorderSide(width: 1.0, color: Colors.transparent),
-                          bottom: BorderSide(width: 1.0, color: Colors.transparent),
-                        ),
-                        color: Colors.transparent,
-                        borderRadius: BorderRadius.all(Radius.circular(10),
-                        ),
-                      ),
-                      padding: EdgeInsets.all(7.0),
-                      child: FittedBox(
-                        child: Text('${primaryColors != null ? slice(slice('${ColorToHex(primaryColors.colors[2])}', 6), 1, -1) : ''}' , style: TextStyle(color: primaryColors != null ? Colors.black : Colors.transparent)),
-                      ),
-                    )
-                ),
-                Container(
-                    height: MediaQuery.of(context).size.height*0.1,
-                    width: MediaQuery.of(context).size.width*0.15,
-                    color: Colors.transparent,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        border: Border(
-                          top: BorderSide(width: 1.0, color: Colors.transparent),
-                          left: BorderSide(width: 1.0, color: Colors.transparent),
-                          right: BorderSide(width: 1.0, color: Colors.transparent),
-                          bottom: BorderSide(width: 1.0, color: Colors.transparent),
-                        ),
-                        color: Colors.transparent,
-                        borderRadius: BorderRadius.all(Radius.circular(10),
-                        ),
-                      ),
-                      padding: EdgeInsets.all(7.0),
-                      child: FittedBox(
-                        child: Text('${primaryColors != null ? slice(slice('${ColorToHex(primaryColors.colors[3])}', 6), 1, -1) : ''}' , style: TextStyle(color: primaryColors != null ? Colors.black : Colors.transparent)),
-                      ),
-                    )
-                ),
-              ]
-          ),
-          FlatButton(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.0)),
-            color: Colors.black,
-            child: Row(
-              children: <Widget> [
-                Spacer(),
-                Text(
-                  'Add to Favourites',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white.withOpacity(1),
-                  ),
-                ),
-                Spacer(),
-              ],
-            ),
-            //onPressed: getImage,
-            onPressed: (){
-              if(primaryColors != null) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => PalettePage(colors: primaryColors.colors)),
-                );
-              } else {
-                Scaffold.of(context).showSnackBar(SnackBar(content: Text("No Image Selected!")));
-              }
-            },
-          ),
-          FlatButton(
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.0)),
-            color: Colors.black,
-            child: Row(
-              children: <Widget> [
-                Spacer(),
-                Text(
-                  'Generate Random Palette',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white.withOpacity(1),
-                  ),
-                ),
-                Spacer(),
-              ],
-            ),
-            onPressed: () {
-              refreshVars();
-              Scaffold.of(context).showSnackBar(SnackBar(content: Text("Loading Image...")));
-              getImgData();
-            },
-          ),
+                    onPressed: () {
+                      refreshVars();
+                      Scaffold.of(context).showSnackBar(SnackBar(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16.0)),
+                          backgroundColor: Colors.black,
+                          content: Container(
+                              height: 50, child: Text("Loading Image..."))));
+                      getImgData();
+                    },
+                  ))),
+          Padding(padding: EdgeInsets.only(bottom: 8.0)),
         ],
       ),
     );

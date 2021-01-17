@@ -60,25 +60,35 @@ class GalleryAccessState extends State<GalleryAccess> {
                   child: galleryFile == null
                       ? Center(
                           child: new Container(
-                          height: 300.0,
-                          color: Colors.transparent,
-                          child: Container (
-                            height: MediaQuery.of(context).size.height*0.2,
-                            child: Image.asset(
-                              'assets/undraw_Organize_photos_re_ogcy.png', fit: BoxFit.fitHeight,),
-                          )
-                        ))
+                              height: 300.0,
+                              color: Colors.transparent,
+                              child: Container(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.2,
+                                child: Image.asset(
+                                  'assets/undraw_Organize_photos_re_ogcy.png',
+                                  fit: BoxFit.fitHeight,
+                                ),
+                              )))
                       : Center(
-                      child: Container(
-                        height: MediaQuery.of(context).size.height*0.4,
-                        child: Image.file(galleryFile,fit: BoxFit.fitWidth,),
-                      ),
-                  ),
+                          child: Container(
+                            decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20))),
+                            height: MediaQuery.of(context).size.height * 0.4,
+                            child: Image.file(
+                              galleryFile,
+                              fit: BoxFit.fill,
+                            ),
+                          ),
+                        ),
                 ),
+                if (galleryFile == null)
                 Text(
                   "Pick an image from your gallery\nto generate a palette!",
                   textAlign: TextAlign.center,
                 ),
+                if (galleryFile == null)
                 Padding(padding: EdgeInsets.only(top: 16)),
                 Spacer(),
                 Row(
@@ -93,7 +103,9 @@ class GalleryAccessState extends State<GalleryAccess> {
                               color: Colors.transparent,
                               child: Container(
                                   decoration: BoxDecoration(
-                                color: primaryColors != null ? primaryColors.colors[0] : Colors.transparent,
+                                color: primaryColors != null
+                                    ? primaryColors.colors[0]
+                                    : Colors.transparent,
                                 borderRadius: BorderRadius.all(
                                   Radius.circular(12),
                                 ),
@@ -106,7 +118,9 @@ class GalleryAccessState extends State<GalleryAccess> {
                               color: Colors.transparent,
                               child: Container(
                                   decoration: BoxDecoration(
-                                color: primaryColors != null ? primaryColors.colors[1] : Colors.transparent,
+                                color: primaryColors != null
+                                    ? primaryColors.colors[1]
+                                    : Colors.transparent,
                                 borderRadius: BorderRadius.all(
                                   Radius.circular(12),
                                 ),
@@ -119,7 +133,9 @@ class GalleryAccessState extends State<GalleryAccess> {
                               color: Colors.transparent,
                               child: Container(
                                   decoration: BoxDecoration(
-                                color: primaryColors != null ? primaryColors.colors[2] : Colors.transparent,
+                                color: primaryColors != null
+                                    ? primaryColors.colors[2]
+                                    : Colors.transparent,
                                 borderRadius: BorderRadius.all(
                                   Radius.circular(12),
                                 ),
@@ -132,7 +148,9 @@ class GalleryAccessState extends State<GalleryAccess> {
                               color: Colors.transparent,
                               child: Container(
                                   decoration: BoxDecoration(
-                                color: primaryColors != null ? primaryColors.colors[3] : Colors.transparent,
+                                color: primaryColors != null
+                                    ? primaryColors.colors[3]
+                                    : Colors.transparent,
                                 borderRadius: BorderRadius.all(
                                   Radius.circular(12),
                                 ),
@@ -157,7 +175,12 @@ class GalleryAccessState extends State<GalleryAccess> {
                               ),
                               padding: EdgeInsets.symmetric(horizontal: 6),
                               child: FittedBox(
-                                child: Text('${primaryColors != null ? slice(slice('${ColorToHex(primaryColors.colors[0])}', 6), 1, -1) : ' '}' , style: TextStyle(color: primaryColors != null ? Colors.black : Colors.transparent)),
+                                child: Text(
+                                    '${primaryColors != null ? slice(slice('${ColorToHex(primaryColors.colors[0])}', 6), 1, -1) : ' '}',
+                                    style: TextStyle(
+                                        color: primaryColors != null
+                                            ? Colors.black
+                                            : Colors.transparent)),
                               ),
                             ),
                           )),
@@ -175,7 +198,12 @@ class GalleryAccessState extends State<GalleryAccess> {
                                 ),
                                 padding: EdgeInsets.symmetric(horizontal: 6),
                                 child: FittedBox(
-                                  child: Text('${primaryColors != null ? slice(slice('${ColorToHex(primaryColors.colors[1])}', 6), 1, -1) : ' '}' , style: TextStyle(color: primaryColors != null ? Colors.black : Colors.transparent)),
+                                  child: Text(
+                                      '${primaryColors != null ? slice(slice('${ColorToHex(primaryColors.colors[1])}', 6), 1, -1) : ' '}',
+                                      style: TextStyle(
+                                          color: primaryColors != null
+                                              ? Colors.black
+                                              : Colors.transparent)),
                                 ),
                               ))),
                       Flexible(
@@ -192,7 +220,12 @@ class GalleryAccessState extends State<GalleryAccess> {
                                 ),
                                 padding: EdgeInsets.symmetric(horizontal: 6),
                                 child: FittedBox(
-                                  child: Text('${primaryColors != null ? slice(slice('${ColorToHex(primaryColors.colors[2])}', 6), 1, -1) : ' '}' , style: TextStyle(color: primaryColors != null ? Colors.black : Colors.transparent)),
+                                  child: Text(
+                                      '${primaryColors != null ? slice(slice('${ColorToHex(primaryColors.colors[2])}', 6), 1, -1) : ' '}',
+                                      style: TextStyle(
+                                          color: primaryColors != null
+                                              ? Colors.black
+                                              : Colors.transparent)),
                                 ),
                               ))),
                       Flexible(
@@ -209,12 +242,19 @@ class GalleryAccessState extends State<GalleryAccess> {
                                 ),
                                 padding: EdgeInsets.symmetric(horizontal: 6),
                                 child: FittedBox(
-                                  child: Text('${primaryColors != null ? slice(slice('${ColorToHex(primaryColors.colors[3])}', 6), 1, -1) : ' '}' , style: TextStyle(color: primaryColors != null ? Colors.black : Colors.transparent)),
+                                  child: Text(
+                                      '${primaryColors != null ? slice(slice('${ColorToHex(primaryColors.colors[3])}', 6), 1, -1) : ' '}',
+                                      style: TextStyle(
+                                          color: primaryColors != null
+                                              ? Colors.black
+                                              : Colors.transparent)),
                                 ),
                               ))),
                       Padding(padding: EdgeInsets.symmetric(horizontal: 8.0)),
                     ]),
+                    if (primaryColors != null)
                 Padding(padding: EdgeInsets.only(top: 16)),
+                if (primaryColors != null)
                 SafeArea(
                     minimum: EdgeInsets.symmetric(horizontal: 16),
                     child: ButtonTheme(
@@ -230,26 +270,27 @@ class GalleryAccessState extends State<GalleryAccess> {
                               color: Colors.white.withOpacity(1),
                             ),
                           ),
-                          onPressed: (){
-                            if(primaryColors != null) {
+                          onPressed: () {
+                            if (primaryColors != null) {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) =>
-                                    PalettePage(colors: primaryColors.colors)),
+                                MaterialPageRoute(
+                                    builder: (context) => PalettePage(
+                                        colors: primaryColors.colors)),
                               );
                             } else {
-                              Scaffold.of(context).showSnackBar(SnackBar(content: Text("No Image selected!")));
+                              Scaffold.of(context).showSnackBar(SnackBar(
+                                  content: Text("No Image selected!")));
                             }
                           },
-                        ))
-                ),
+                        ))),
                 SafeArea(
                     minimum: EdgeInsets.symmetric(horizontal: 16),
                     child: ButtonTheme(
                         minWidth: double.infinity,
                         child: new FlatButton(
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12.0)),
+                              borderRadius: BorderRadius.circular(8.0)),
                           color: Colors.black,
                           child: new Text(
                             'Select Image from Gallery',
@@ -260,7 +301,7 @@ class GalleryAccessState extends State<GalleryAccess> {
                           ),
                           onPressed: getImage,
                         ))),
-                Padding(padding: EdgeInsets.all(8.0)),
+                Padding(padding: EdgeInsets.only(bottom: 8.0)),
               ],
             ),
           );

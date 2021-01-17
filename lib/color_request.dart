@@ -44,7 +44,7 @@ Future<PrimaryColors> fetchLocalPalette(var imageFile) async {
   List fileBytes = await imageFile.readAsBytesSync();
   String encodedFile = base64.encode(fileBytes);
   final body = {"requests" : [{"image" : {"content" : "$encodedFile"}, "features" : [{"maxResults" : 4, "type" : "IMAGE_PROPERTIES"}]}]};
-  final token = "ya29.c.Kp0B7gcJ4of5H2vCDxWXBb5CYLLuLnGrcmt1C3bPldGOcIF8ZWVFXqdF8rKxakWPc_6wMVxHhdAWHGKZbSEyFl_e62AGnBDYbK8P-QyXn1qV5J5hSATeN7zRTbS_8iSh9oeRq7AEAVlECiTzZTkEVsdB4fl6wyUgtJCEuHG_yfXLaNpkhFxmUZ6aveoEzHwmeWLmf-JRb0D_lQijBEr3Bg";
+  final token = "ya29.c.Kp0B7gdO1RBfjxxNX_S5_c8GTca88RK0LovCqLdMiO8GetPocnA2KRVV1fPOekIM35mckB7U6mADcpbysVemYb0wGt5Ts_xulWrqDZndnz4spN4KLA_y92Yqrw2rH0Hcl6WnaoubetTiiM3bKxqlTybSEPRkLCKzvQK06rI5p8G5_9HKDULfqnLBsNPyejBJsByCkywSt_DnX-G74Ca8OQ";
   final headers = {"Content-Type": "application/json", "Authorization" : "Bearer $token"};
   final response = await http.post("https://vision.googleapis.com/v1/images:annotate", body: jsonEncode(body), headers: headers);
 
@@ -58,7 +58,7 @@ Future<PrimaryColors> fetchLocalPalette(var imageFile) async {
 
 Future<PrimaryColors> fetchPalette(var imageUri) async {
   final body = {"requests" : [{"image" : {"source" : {"imageUri" : "$imageUri"}}, "features" : [{"maxResults" : 4, "type" : "IMAGE_PROPERTIES"},]}]};
-  final token = "ya29.c.Kp0B7gcJ4of5H2vCDxWXBb5CYLLuLnGrcmt1C3bPldGOcIF8ZWVFXqdF8rKxakWPc_6wMVxHhdAWHGKZbSEyFl_e62AGnBDYbK8P-QyXn1qV5J5hSATeN7zRTbS_8iSh9oeRq7AEAVlECiTzZTkEVsdB4fl6wyUgtJCEuHG_yfXLaNpkhFxmUZ6aveoEzHwmeWLmf-JRb0D_lQijBEr3Bg";
+  final token = "ya29.c.Kp0B7gdO1RBfjxxNX_S5_c8GTca88RK0LovCqLdMiO8GetPocnA2KRVV1fPOekIM35mckB7U6mADcpbysVemYb0wGt5Ts_xulWrqDZndnz4spN4KLA_y92Yqrw2rH0Hcl6WnaoubetTiiM3bKxqlTybSEPRkLCKzvQK06rI5p8G5_9HKDULfqnLBsNPyejBJsByCkywSt_DnX-G74Ca8OQ";
   final headers = {"Content-Type": "application/json", "Authorization" : "Bearer $token"};
   final response = await http.post("https://vision.googleapis.com/v1/images:annotate", body: jsonEncode(body), headers: headers);
 

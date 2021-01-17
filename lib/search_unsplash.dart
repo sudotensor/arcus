@@ -175,7 +175,12 @@ class _SearchUnsplashState extends State<SearchUnsplash> {
                                   );
                                 } else {
                                   Scaffold.of(context).showSnackBar(SnackBar(
-                                      content: Text("Image too big!")));
+                                    shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.0)),
+                          backgroundColor: Colors.black,
+                          content: Container(
+                              height: 50, 
+                                      child: Text("Image too big!"))));
                                 }
                               },
                             )

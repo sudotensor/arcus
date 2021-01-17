@@ -1,3 +1,4 @@
+import 'package:arcus/color_request.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:hexcolor/hexcolor.dart';
@@ -9,23 +10,17 @@ class Favourites extends StatefulWidget {
 }
 
 class _FavouritesState extends State<Favourites> {
-  List<_MyPalette> palettes = <_MyPalette>[
-    _MyPalette('Palette1', randomColor(), randomColor(), randomColor(), randomColor()),
-    _MyPalette('Palette2', randomColor(), randomColor(), randomColor(), randomColor()),
-    _MyPalette('Palette3', randomColor(), randomColor(), randomColor(), randomColor()),
-    _MyPalette('Palette4', randomColor(), randomColor(), randomColor(), randomColor()),
-    _MyPalette('Palette5', randomColor(), randomColor(), randomColor(), randomColor()),
-    _MyPalette('Palette6', randomColor(), randomColor(), randomColor(), randomColor()),
-    _MyPalette('Palette7', randomColor(), randomColor(), randomColor(), randomColor()),
-    _MyPalette('Palette8', randomColor(), randomColor(), randomColor(), randomColor()),
-    _MyPalette('Palette9', randomColor(), randomColor(), randomColor(), randomColor()),
-    _MyPalette('Palette10', randomColor(), randomColor(), randomColor(), randomColor()),
-    _MyPalette('Palette11', randomColor(), randomColor(), randomColor(), randomColor()),
-    _MyPalette('Palette12', randomColor(), randomColor(), randomColor(), randomColor()),
-    _MyPalette('Palette13', randomColor(), randomColor(), randomColor(), randomColor()),
-    _MyPalette('Palette14', randomColor(), randomColor(), randomColor(), randomColor()),
-    _MyPalette('Palette15', randomColor(), randomColor(), randomColor(), randomColor()),
-  ];
+  List<_MyPalette> palettes = <_MyPalette>[];
+
+  Future<List<PrimaryColors>>getPrimaryColors() {
+
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getDogs();
+  }
 
   @override
   Widget build(BuildContext context) {

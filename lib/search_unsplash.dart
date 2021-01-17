@@ -1,3 +1,4 @@
+import 'package:arcus/color_request.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:io';
 import './palette_page.dart';
+
 
 class SearchImg {
   final String url;
@@ -42,6 +44,7 @@ class _SearchUnsplashState extends State<SearchUnsplash> {
   final int _numImgs = 5;
   var searchTerm = "";
   final searchController = TextEditingController();
+  PrimaryColors primaryColors;
 
   @override
   void dispose() {
@@ -113,10 +116,10 @@ class _SearchUnsplashState extends State<SearchUnsplash> {
                                 ),
                                 //onPressed: getImage,
                                 onPressed: (){
-                                  // Navigator.push(
-                                  //   context,
-                                  //     MaterialPageRoute(builder: (context) => primaryColors != null ? PalettePage(primaryColors.colors) : null),
-                                  // );
+                                  Navigator.push(
+                                    context,
+                                      MaterialPageRoute(builder: (context) => primaryColors != null ? PalettePage(primaryColors.colors)),
+                                  );
                                 },
                               ),
                             ],
@@ -153,4 +156,4 @@ class _SearchUnsplashState extends State<SearchUnsplash> {
     ]);
   }
 }
-
+}

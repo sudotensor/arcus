@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:io';
 import './color_request.dart';
+import './palette_page.dart';
 
 class RandImg {
   final String url;
@@ -240,7 +241,25 @@ class _RandomUnsplashState extends State<RandomUnsplash> {
                 ),
               ]
           ),
-
+          FlatButton(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.0)),
+            color: Colors.black,
+            child: new Text(
+              'Add to Favourites',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.white.withOpacity(1),
+              ),
+            ),
+            //onPressed: getImage,
+            onPressed: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => PalettePage(primaryColors.colors)),
+              );
+            },
+          ),
           new FlatButton(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8.0)),

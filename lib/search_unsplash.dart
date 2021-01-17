@@ -141,6 +141,7 @@ class _SearchUnsplashState extends State<SearchUnsplash> {
       ),
       Expanded(
           child: Container(
+            padding: EdgeInsets.only(top: 12),
               decoration: BoxDecoration(
                 color: Colors.white,
               ),
@@ -151,7 +152,6 @@ class _SearchUnsplashState extends State<SearchUnsplash> {
                 itemBuilder: (BuildContext context, int index) {
                   return Column(
                     children: [
-                      Padding(padding: EdgeInsets.only(top: 12)),
                       searchImgs[index] != null
                           ? Container(
                             padding: EdgeInsets.symmetric(horizontal: 16),
@@ -238,10 +238,10 @@ class _SearchUnsplashState extends State<SearchUnsplash> {
                                 baseColor: Colors.white,
                                 highlightColor: Colors.grey,
                                 child: Container(
+                                  padding: EdgeInsets.symmetric(horizontal: 16),
                                   child: Column(
                                     children: <Widget>[
                                       Container(
-                                        padding: EdgeInsets.symmetric(horizontal: 16),
                                         height: 150,
                                         width: 400,
                                         decoration: BoxDecoration(
@@ -251,7 +251,7 @@ class _SearchUnsplashState extends State<SearchUnsplash> {
                                           ),
                                         ),
                                       ),
-                                      Padding(padding: EdgeInsets.all(8.0)),
+                                      Padding(padding: EdgeInsets.only(bottom: 12.0)),
                                     ],
                                   ),
                                 ),

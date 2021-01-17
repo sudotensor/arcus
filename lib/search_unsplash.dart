@@ -88,21 +88,24 @@ class _SearchUnsplashState extends State<SearchUnsplash> {
       Container(
         padding: EdgeInsets.all(16.0),
         child: Row(children: <Widget>[
+          Spacer(),
           Container(
               width: MediaQuery.of(context).size.width * 0.65,
               child: TextField(
                 controller: searchController,
               )),
+          Padding(padding: EdgeInsets.symmetric(horizontal: 3.0)),
           Container(
-              width: MediaQuery.of(context).size.width * 0.25,
+              width: MediaQuery.of(context).size.width * 0.20,
               child: FlatButton(
                 onPressed: () {
                   searchTerm = searchController.text;
                   Scaffold.of(context).showSnackBar(SnackBar(content: Text("Loading Images...")));
                   getContent();
                 },
-                child: Icon(Icons.search),
-              ))
+                child: Icon(Icons.search, size: 50),
+              )),
+          Spacer(),
         ]),
       ),
       Expanded(
@@ -115,7 +118,27 @@ class _SearchUnsplashState extends State<SearchUnsplash> {
                 itemBuilder: (BuildContext context, int index) {
                   return Column(
                     children: [
-                      searchImgs[index] != null ? Image.network(searchImgs[index].url) : Text(""), //TODO -- ADD SHIMMER instead of TEXT
+                      searchImgs[index] != null ? Image.network(searchImgs[index].url)
+                      : SizedBox(
+                        child: Shimmer.fromColors (
+                          baseColor: Colors.white,
+                          highlightColor: Colors.grey,
+                          child: Container (
+                            child: Column(
+                              children: <Widget> [
+                                Container (
+                                  height: 150,
+                                  width: 400,
+                                  decoration: BoxDecoration (
+                                    color: Colors.white.withOpacity(0.4),
+                                  ),
+                                ),
+                                Padding(padding: EdgeInsets.all(8.0)),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
                       searchImgs[index] != null ? FlatButton(
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.0)),
@@ -138,7 +161,27 @@ class _SearchUnsplashState extends State<SearchUnsplash> {
                                       PalettePage(primaryColors.colors)),
                             );
                         },
-                      ) : Text(""),//TODO -- ADD SHIMMER HERE TOO
+                      )
+                      : SizedBox (
+                        child: Shimmer.fromColors(
+                          baseColor: Colors.white,
+                          highlightColor: Colors.grey,
+                          child: Container(
+                            child: Column(
+                              children: <Widget> [
+                                Container(
+                                  height: 150,
+                                  width: 400,
+                                  decoration: BoxDecoration (
+                                    color: Colors.white.withOpacity(0.4),
+                                  ),
+                                ),
+                                Padding(padding: EdgeInsets.all(8.0)),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
                      ],
                   );
                 },

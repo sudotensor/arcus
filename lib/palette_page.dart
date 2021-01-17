@@ -42,7 +42,7 @@ class PalettePage extends StatelessWidget {
                       color: Colors.transparent,
                       child: Container(
                           decoration: BoxDecoration(
-                            color: colors != null ? colors[2] : Colors.transparent,
+                            color: colors != null ? colors[1] : Colors.transparent,
                             borderRadius: BorderRadius.all(
                               Radius.circular(12),
                             ),

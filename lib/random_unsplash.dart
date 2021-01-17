@@ -249,12 +249,18 @@ class _RandomUnsplashState extends State<RandomUnsplash> {
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8.0)),
             color: Colors.black,
-            child: new Text(
-              'Add to Favourites',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.white.withOpacity(1),
-              ),
+            child: Row(
+              children: <Widget> [
+                Spacer(),
+                Text(
+                  'Add to Favourites',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white.withOpacity(1),
+                  ),
+                ),
+                Spacer(),
+              ],
             ),
             //onPressed: getImage,
             onPressed: (){
@@ -269,16 +275,22 @@ class _RandomUnsplashState extends State<RandomUnsplash> {
               }
             },
           ),
-          new FlatButton(
+          FlatButton(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8.0)),
             color: Colors.black,
-            child: new Text(
-              'Generate New Palette',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.white.withOpacity(1),
-              ),
+            child: Row(
+              children: <Widget> [
+                Spacer(),
+                Text(
+                  'Generate Random Palette',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white.withOpacity(1),
+                  ),
+                ),
+                Spacer(),
+              ],
             ),
             onPressed: () {
               refreshVars();

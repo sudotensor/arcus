@@ -55,46 +55,42 @@ class GalleryAccessState extends State<GalleryAccess> {
             child: new Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
+                Padding(padding: EdgeInsets.only(top: 8)),
                 SizedBox(
-                  width: 350.0,
-                  child: galleryFile == null
-                      ? Center(
-                          child: new Container(
-                              height: 300.0,
-                              color: Colors.transparent,
-                              child: Container(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.2,
-                                child: Image.asset(
-                                  'assets/undraw_Organize_photos_re_ogcy.png',
-                                  fit: BoxFit.fitHeight,
-                                ),
-                              )))
-                      : Center(
-                          child: Container(
-                            decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20))),
-                            height: MediaQuery.of(context).size.height * 0.4,
-                            child: Image.file(
-                              galleryFile,
-                              fit: BoxFit.fill,
-                            ),
-                          ),
-                        ),
-                ),
+                      width: MediaQuery.of(context).size.width - 32,
+                      child: galleryFile == null ? 
+                      Container(
+                      padding: EdgeInsets.symmetric(horizontal: 16),
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                                fit: BoxFit.fitWidth,
+                                image: AssetImage('assets/undraw_Organize_photos_re_ogcy.png')),
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(Radius.circular(12))),
+                      height: 300.0,
+                    )
+                      : Container(
+                        padding: EdgeInsets.symmetric(horizontal: 16),
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                fit: BoxFit.cover,
+                                image: FileImage(galleryFile)),
+                            color: Colors.grey[100],
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(12))),
+                        height: MediaQuery.of(context).size.height * 0.4,
+                      )),
                 if (galleryFile == null)
                 Text(
                   "Pick an image from your gallery\nto generate a palette!",
                   textAlign: TextAlign.center,
                 ),
-                if (galleryFile == null)
-                Padding(padding: EdgeInsets.only(top: 16)),
-                Spacer(),
+                if (galleryFile != null)
+                Padding(padding: EdgeInsets.only(top: 12)),
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      Padding(padding: EdgeInsets.symmetric(horizontal: 8)),
+                      Padding(padding: EdgeInsets.symmetric(horizontal: 6)),
                       Flexible(
                           flex: 1,
                           child: Container(
@@ -155,12 +151,12 @@ class GalleryAccessState extends State<GalleryAccess> {
                                   Radius.circular(12),
                                 ),
                               )))),
-                      Padding(padding: EdgeInsets.symmetric(horizontal: 8)),
+                      Padding(padding: EdgeInsets.symmetric(horizontal: 6)),
                     ]),
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      Padding(padding: EdgeInsets.symmetric(horizontal: 8.0)),
+                      Padding(padding: EdgeInsets.symmetric(horizontal: 6.0)),
                       Flexible(
                           flex: 1,
                           child: Container(
@@ -176,7 +172,7 @@ class GalleryAccessState extends State<GalleryAccess> {
                               padding: EdgeInsets.symmetric(horizontal: 6),
                               child: FittedBox(
                                 child: Text(
-                                    '${primaryColors != null ? slice(slice('${ColorToHex(primaryColors.colors[0])}', 6), 1, -1) : ' '}',
+                                    '${primaryColors != null ? slice(slice('${ColorToHex(primaryColors.colors[0])}', 6), 4, -1) : ' '}'.toUpperCase(),
                                     style: TextStyle(
                                         color: primaryColors != null
                                             ? Colors.black
@@ -199,7 +195,7 @@ class GalleryAccessState extends State<GalleryAccess> {
                                 padding: EdgeInsets.symmetric(horizontal: 6),
                                 child: FittedBox(
                                   child: Text(
-                                      '${primaryColors != null ? slice(slice('${ColorToHex(primaryColors.colors[1])}', 6), 1, -1) : ' '}',
+                                      '${primaryColors != null ? slice(slice('${ColorToHex(primaryColors.colors[1])}', 6), 4, -1) : ' '}'.toUpperCase(),
                                       style: TextStyle(
                                           color: primaryColors != null
                                               ? Colors.black
@@ -221,7 +217,7 @@ class GalleryAccessState extends State<GalleryAccess> {
                                 padding: EdgeInsets.symmetric(horizontal: 6),
                                 child: FittedBox(
                                   child: Text(
-                                      '${primaryColors != null ? slice(slice('${ColorToHex(primaryColors.colors[2])}', 6), 1, -1) : ' '}',
+                                      '${primaryColors != null ? slice(slice('${ColorToHex(primaryColors.colors[2])}', 6), 4, -1) : ' '}'.toUpperCase(),
                                       style: TextStyle(
                                           color: primaryColors != null
                                               ? Colors.black
@@ -243,17 +239,15 @@ class GalleryAccessState extends State<GalleryAccess> {
                                 padding: EdgeInsets.symmetric(horizontal: 6),
                                 child: FittedBox(
                                   child: Text(
-                                      '${primaryColors != null ? slice(slice('${ColorToHex(primaryColors.colors[3])}', 6), 1, -1) : ' '}',
+                                      '${primaryColors != null ? slice(slice('${ColorToHex(primaryColors.colors[3])}', 6), 4, -1) : ' '}'.toUpperCase(),
                                       style: TextStyle(
                                           color: primaryColors != null
                                               ? Colors.black
                                               : Colors.transparent)),
                                 ),
                               ))),
-                      Padding(padding: EdgeInsets.symmetric(horizontal: 8.0)),
+                      Padding(padding: EdgeInsets.symmetric(horizontal: 6.0)),
                     ]),
-                    if (primaryColors != null)
-                Padding(padding: EdgeInsets.only(top: 16)),
                 if (primaryColors != null)
                 SafeArea(
                     minimum: EdgeInsets.symmetric(horizontal: 16),
@@ -284,6 +278,7 @@ class GalleryAccessState extends State<GalleryAccess> {
                             }
                           },
                         ))),
+                        Spacer(),
                 SafeArea(
                     minimum: EdgeInsets.symmetric(horizontal: 16),
                     child: ButtonTheme(

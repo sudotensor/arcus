@@ -48,7 +48,11 @@ class _FavouritesState extends State<Favourites> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return Container (
+      decoration: BoxDecoration(
+        color: Colors.white,
+      ),
+      child: ListView.builder(
         padding: const EdgeInsets.all(8),
         itemCount: paletteList.length > 0 ? paletteList.length : 0,
         itemBuilder: (BuildContext context, int index) {
@@ -72,34 +76,40 @@ class _FavouritesState extends State<Favourites> {
                   alignment: Alignment(0.0, 0.0),
                   child: Column (
                     children: <Widget>[
-                      Row(
-                        children: <Widget> [
-                          Padding(padding: EdgeInsets.all(8.0)),
-                          Text('${paletteList[index].name}', style: TextStyle(decoration: TextDecoration.underline, fontSize: 20.0,)),
-                          Spacer(),
-                          Container(
-                            child: IconButton(
-                              alignment: Alignment.centerRight,
-                              icon: (Icon(Icons.cancel)),
-                              color: Colors.black,
-                              onPressed: () => _removePalette(index),
+                      Container(
+                        child: Column (
+                          children: <Widget>[
+                            Row(
+                                children: <Widget> [
+                                  Padding(padding: EdgeInsets.all(8.0)),
+                                  Text('${paletteList[index].name}', style: TextStyle(decoration: TextDecoration.underline, fontSize: 20.0,)),
+                                  Spacer(),
+                                  Container(
+                                    child: IconButton(
+                                      alignment: Alignment.centerRight,
+                                      icon: (Icon(Icons.cancel)),
+                                      color: Colors.black,
+                                      onPressed: () => _removePalette(index),
+                                    ),
+                                  ),
+                                  Padding(padding: EdgeInsets.all(2.0)),
+                                ]
                             ),
-                          ),
-                          Padding(padding: EdgeInsets.all(2.0)),
-                        ]
-                      ),
-                      Row(
-                        children: <Widget> [
-                          Spacer(),
-                          Box(paletteList[index].color1),
-                          Spacer(),
-                          Box(paletteList[index].color2),
-                          Spacer(),
-                          Box(paletteList[index].color3),
-                          Spacer(),
-                          Box(paletteList[index].color4),
-                          Spacer(),
-                        ]
+                            Row(
+                                children: <Widget> [
+                                  Spacer(),
+                                  Box(paletteList[index].color1),
+                                  Spacer(),
+                                  Box(paletteList[index].color2),
+                                  Spacer(),
+                                  Box(paletteList[index].color3),
+                                  Spacer(),
+                                  Box(paletteList[index].color4),
+                                  Spacer(),
+                                ]
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -108,6 +118,7 @@ class _FavouritesState extends State<Favourites> {
             ),
           );
         },
+    )
     );
   }
 // Function that removes a selected palette

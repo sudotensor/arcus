@@ -75,6 +75,9 @@ class _RandomUnsplashState extends State<RandomUnsplash> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+      ),
       padding: EdgeInsets.all(16.0),
       child: Column(
         children: [

@@ -43,13 +43,12 @@ class GalleryAccessState extends State<GalleryAccess> {
             child: new Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Spacer(),
+                Padding (padding: EdgeInsets.all(10.0)),
                 SizedBox(
-                  height: 400.0,
-                  width: 350.0,
+                  height: 325.0,
                   child: galleryFile == null
                       ? Center(child: new Container (
-                          height: 300.0,
+                          height: 225.0,
                           width: 450.0,
                           color: Colors.transparent,
                           child: Image.asset('assets/undraw_Organize_photos_re_ogcy.png'),
@@ -112,7 +111,7 @@ class GalleryAccessState extends State<GalleryAccess> {
                     Padding (padding: EdgeInsets.all(15.0)),
                   ]
                 ),
-                Spacer(),
+                Padding (padding: EdgeInsets.all(10.0)),
                 Row (
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[

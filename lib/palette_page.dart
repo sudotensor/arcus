@@ -1,7 +1,11 @@
+import 'package:arcus/color_request.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:quartet/quartet.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:path/path.dart';
+import './favourites.dart';
 
 class PalettePage extends StatefulWidget {
   final List<dynamic> colors;
@@ -188,6 +192,7 @@ class _PalettePageState extends State<PalettePage> {
               Container(
                   width: MediaQuery.of(context).size.width * 0.5,
                   child: TextField(
+                    textAlign: TextAlign.center,
                     decoration: InputDecoration(
                       hintText: "Name"
                     ),
@@ -205,7 +210,10 @@ class _PalettePageState extends State<PalettePage> {
                     color: Colors.white.withOpacity(1),
                   ),
                 ),
-                onPressed: () {
+                onPressed: () async {
+                  final Future<Database> db = openDatabase(join(await getDatabasesPath(), 'favorites.db'));
+                  final palette = MyPalette(nameController.text, widget.colors[0], widget.colors[1], widget.colors[2], widget.colors[3]);
+                  await insertColors(palette, await db);
                   Navigator.pop(context);
                 },
               ),

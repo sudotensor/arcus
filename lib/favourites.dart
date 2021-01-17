@@ -3,8 +3,12 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:quartet/quartet.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:path/path.dart';
 
 class Favourites extends StatefulWidget {
+  final Database db;
+  const Favourites({Key key, this.db}) : super(key: key);
   @override
   _FavouritesState createState() => _FavouritesState();
 }
@@ -252,6 +256,31 @@ class MyPalette {
   final Color color2;
   final Color color3;
   final Color color4;
+
+  Map<String, dynamic> toMap() {
+    return {
+      "name" : name,
+      "color1" : color1.toString(),
+      "color2" : color2.toString(),
+      "color3" : color3.toString(),
+      "color4" : color4.toString()
+    };
+  }
+}
+
+Future<List<MyPalette>> palettes() async {
+  final Database db = await openDatabase(join(await getDatabasesPath(), 'favorites.db'));
+
+  final List<Map<String, dynamic>> maps = await db.query('favorites');
+
+  return List.generate(maps.length, (i) {
+    return MyPalette(
+        maps[i]["name"],
+        Color(int.parse(maps[i]["color1"].split('(0x')[1].split(')')[0], radix: 16)),
+        Color(int.parse(maps[i]["color2"].split('(0x')[1].split(')')[0], radix: 16)),
+        Color(int.parse(maps[i]["color3"].split('(0x')[1].split(')')[0], radix: 16)),
+        Color(int.parse(maps[i]["color4"].split('(0x')[1].split(')')[0], radix: 16)));
+  });
 }
 
 //GENERATE RANDOM COLORS FOR PLACEHOLDER PALETTES

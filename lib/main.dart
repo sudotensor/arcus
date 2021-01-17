@@ -11,11 +11,12 @@ void main() async {
     join(await getDatabasesPath(), 'favorites.db'),
     onCreate: (db, version) {
       return db.execute(
-        "CREATE TABLE favorites(id INTEGER PRIMARY KEY, color1 TEXT, color2 TEXT, color3 TEXT, color4 TEXT)"
+        "CREATE TABLE favorites(name TEXT, color1 TEXT, color2 TEXT, color3 TEXT, color4 TEXT)"
       );
     },
     version: 1
   );
+  await database.then((value) => value.close());
   runApp(MyApp());
 }
 

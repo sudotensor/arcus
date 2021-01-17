@@ -258,7 +258,7 @@ class _RandomUnsplashState extends State<RandomUnsplash> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => PalettePage(primaryColors.colors)),
+                      builder: (context) => PalettePage(colors: primaryColors.colors)),
                 );
               } else {
                 Scaffold.of(context).showSnackBar(SnackBar(content: Text("No Image Selected!")));

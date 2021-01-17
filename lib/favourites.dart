@@ -10,7 +10,7 @@ class Favourites extends StatefulWidget {
 }
 
 class _FavouritesState extends State<Favourites> {
-  List<_MyPalette> palettes = <_MyPalette>[];
+  List<MyPalette> palettes = <MyPalette>[];
 
   Future<List<PrimaryColors>>getPrimaryColors() {
 
@@ -95,7 +95,7 @@ class _FavouritesState extends State<Favourites> {
 }
 
 class PopUpScreen extends StatelessWidget {
-  final List<_MyPalette> palettes;
+  final List<MyPalette> palettes;
   final int index;
   PopUpScreen(this.palettes, this.index);
 
@@ -244,8 +244,8 @@ class Box extends StatelessWidget {
 }
 
 // Palette class with 1 name prop and 4 color props
-class _MyPalette {
-  const _MyPalette(this.name, this.color1, this.color2, this.color3, this.color4);
+class MyPalette {
+  const MyPalette(this.name, this.color1, this.color2, this.color3, this.color4);
 
   final String name;
   final Color color1;

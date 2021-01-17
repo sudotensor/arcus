@@ -227,7 +227,7 @@ class GalleryAccessState extends State<GalleryAccess> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(builder: (context) =>
-                                    PalettePage(primaryColors.colors)),
+                                    PalettePage(colors: primaryColors.colors)),
                               );
                             } else {
                               Scaffold.of(context).showSnackBar(SnackBar(content: Text("No Image selected!")));

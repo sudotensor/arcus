@@ -3,10 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:quartet/quartet.dart';
 
-class PalettePage extends StatelessWidget {
-  PalettePage(this.colors);
-
+class PalettePage extends StatefulWidget {
   final List<dynamic> colors;
+  const PalettePage({Key key, this.colors}) : super(key: key);
+  @override
+  _PalettePageState createState() => _PalettePageState();
+}
+
+class _PalettePageState extends State<PalettePage> {
+  final nameController = new TextEditingController();
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +40,7 @@ class PalettePage extends StatelessWidget {
                       color: Colors.transparent,
                       child: Container(
                           decoration: BoxDecoration(
-                            color: colors != null ? colors[0] : Colors.transparent,
+                            color: widget.colors != null ? widget.colors[0] : Colors.transparent,
                             borderRadius: BorderRadius.all(
                               Radius.circular(12),
                             ),
@@ -42,7 +53,7 @@ class PalettePage extends StatelessWidget {
                       color: Colors.transparent,
                       child: Container(
                           decoration: BoxDecoration(
-                            color: colors != null ? colors[2] : Colors.transparent,
+                            color: widget.colors != null ? widget.colors[2] : Colors.transparent,
                             borderRadius: BorderRadius.all(
                               Radius.circular(12),
                             ),
@@ -55,7 +66,7 @@ class PalettePage extends StatelessWidget {
                       color: Colors.transparent,
                       child: Container(
                           decoration: BoxDecoration(
-                            color: colors != null ? colors[2] : Colors.transparent,
+                            color: widget.colors != null ? widget.colors[2] : Colors.transparent,
                             borderRadius: BorderRadius.all(
                               Radius.circular(12),
                             ),
@@ -68,7 +79,7 @@ class PalettePage extends StatelessWidget {
                       color: Colors.transparent,
                       child: Container(
                           decoration: BoxDecoration(
-                            color: colors != null ? colors[3] : Colors.transparent,
+                            color: widget.colors != null ? widget.colors[3] : Colors.transparent,
                             borderRadius: BorderRadius.all(
                               Radius.circular(12),
                             ),
@@ -93,7 +104,7 @@ class PalettePage extends StatelessWidget {
                       ),
                       padding: EdgeInsets.symmetric(horizontal: 6),
                       child: FittedBox(
-                       child: Text('${slice(slice('${ColorToHex(colors[0])}', 6), 1, -1)}', style: TextStyle(fontSize: 40)),
+                        child: Text('${slice(slice('${ColorToHex(widget.colors[0])}', 6), 1, -1)}', style: TextStyle(fontSize: 40)),
                       ),
                     ),
                   )),
@@ -111,7 +122,7 @@ class PalettePage extends StatelessWidget {
                       ),
                       padding: EdgeInsets.symmetric(horizontal: 6),
                       child: FittedBox(
-                        child: Text('${slice(slice('${ColorToHex(colors[1])}', 6), 1, -1)}', style: TextStyle(fontSize: 40)),
+                        child: Text('${slice(slice('${ColorToHex(widget.colors[1])}', 6), 1, -1)}', style: TextStyle(fontSize: 40)),
                       ),
                     ),
                   )),
@@ -129,7 +140,7 @@ class PalettePage extends StatelessWidget {
                       ),
                       padding: EdgeInsets.symmetric(horizontal: 6),
                       child: FittedBox(
-                        child: Text('${slice(slice('${ColorToHex(colors[2])}', 6), 1, -1)}', style: TextStyle(fontSize: 40)),
+                        child: Text('${slice(slice('${ColorToHex(widget.colors[2])}', 6), 1, -1)}', style: TextStyle(fontSize: 40)),
                       ),
                     ),
                   )),
@@ -147,7 +158,7 @@ class PalettePage extends StatelessWidget {
                       ),
                       padding: EdgeInsets.symmetric(horizontal: 6),
                       child: FittedBox(
-                        child: Text('${slice(slice('${ColorToHex(colors[3])}', 6), 1, -1)}', style: TextStyle(fontSize: 40)),
+                        child: Text('${slice(slice('${ColorToHex(widget.colors[3])}', 6), 1, -1)}', style: TextStyle(fontSize: 40)),
                       ),
                     ),
                   )),
@@ -155,9 +166,16 @@ class PalettePage extends StatelessWidget {
             ],
           ),
           Spacer(),
-          Row(
+          Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Container(
+                width: MediaQuery.of(context).size.width*0.5,
+                child: TextField(
+                controller: nameController,
+              )
+              ),
+              Padding(padding: EdgeInsets.all(8.0)),
               FlatButton(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8.0)),
@@ -176,12 +194,6 @@ class PalettePage extends StatelessWidget {
             ],
           ),
           Padding(padding: EdgeInsets.all(20.0)),
-          Row (
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget> [
-
-            ],
-          ),
         ],
       ),
     );

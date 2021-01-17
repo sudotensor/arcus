@@ -135,7 +135,7 @@ class _SearchUnsplashState extends State<SearchUnsplash> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      PalettePage(primaryColors.colors)),
+                                      PalettePage(colors: primaryColors.colors)),
                             );
                         },
                       ) : Text(""),//TODO -- ADD SHIMMER HERE TOO

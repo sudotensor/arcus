@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
+import 'package:hexcolor/hexcolor.dart';
+import 'package:quartet/quartet.dart';
 
 class Favourites extends StatefulWidget {
   @override
@@ -7,7 +9,6 @@ class Favourites extends StatefulWidget {
 }
 
 class _FavouritesState extends State<Favourites> {
-
   List<_MyPalette> palettes = <_MyPalette>[
     _MyPalette('Palette1', randomColor(), randomColor(), randomColor(), randomColor()),
     _MyPalette('Palette2', randomColor(), randomColor(), randomColor(), randomColor()),
@@ -36,7 +37,7 @@ class _FavouritesState extends State<Favourites> {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => PopUpScreen()),
+                MaterialPageRoute(builder: (context) => PopUpScreen(palettes, index)),
               );
             },
             child: Container(
@@ -46,6 +47,7 @@ class _FavouritesState extends State<Favourites> {
                   color: Colors.black,
                   width: 1,
                 ),
+                borderRadius: BorderRadius.circular(12),
               ),
               child: Align(
                   alignment: Alignment(0.0, 0.0),
@@ -98,18 +100,129 @@ class _FavouritesState extends State<Favourites> {
 }
 
 class PopUpScreen extends StatelessWidget {
+  final List<_MyPalette> palettes;
+  final int index;
+  PopUpScreen(this.palettes, this.index);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: ElevatedButton(
-          child: InkWell(
-            onTap: () {
-              Navigator.pop(context);
-            }, // Handle your callback
-            child: Text('clicky'),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget> [
+          Padding(padding: EdgeInsets.all(30.0)),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text('${palettes[index].name}', style: TextStyle(fontSize: 40)),
+            ]
           ),
-        )
+          Padding(padding: EdgeInsets.all(15.0)),
+          Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  height: 80,
+                  width: 350,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.0),
+                    color: palettes[index].color1,
+                  ),
+                ),
+              ]
+          ),
+          Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text('${slice(slice('${ColorToHex(palettes[index].color1)}', 6), 1, -1)}', style: TextStyle(fontSize: 40)),
+              ]
+          ),
+          Spacer(),
+          Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  height: 80,
+                  width: 350,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.0),
+                    color: palettes[index].color2,
+                  ),
+                ),
+              ]
+          ),
+          Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text('${slice(slice('${ColorToHex(palettes[index].color2)}', 6), 1, -1)}', style: TextStyle(fontSize: 40)),
+              ]
+          ),
+          Spacer(),
+          Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  height: 80,
+                  width: 350,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.0),
+                    color: palettes[index].color3,
+                  ),
+                ),
+              ]
+          ),
+          Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text('${slice(slice('${ColorToHex(palettes[index].color3)}', 6), 1, -1)}', style: TextStyle(fontSize: 40)),
+              ]
+          ),
+          Spacer(),
+          Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  height: 80,
+                  width: 350,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.0),
+                    color: palettes[index].color4,
+                  ),
+                ),
+              ]
+          ),
+          Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text('${slice(slice('${ColorToHex(palettes[index].color4)}', 6), 1, -1)}', style: TextStyle(fontSize: 40)),
+              ]
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              SafeArea(
+                  minimum: EdgeInsets.symmetric(horizontal: 16),
+                  child: ButtonTheme(
+                      child: new FlatButton(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.0)),
+                        color: Colors.black,
+                        child: new Text(
+                          'Go Back',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white.withOpacity(1),
+                            fontSize: 20.0
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        }
+                      ))),
+            ]
+          ),
+          Spacer(),
+        ],
       )
     );
   }
@@ -118,7 +231,6 @@ class PopUpScreen extends StatelessWidget {
 // Prints a box widget according to the color passed to it
 class Box extends StatelessWidget {
   Box(this.color);
-
   final Color color;
 
   @override
@@ -130,7 +242,7 @@ class Box extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
             color: color,
-            borderRadius: BorderRadius.all(Radius.circular(0))),
+            borderRadius: BorderRadius.all(Radius.circular(10))),
       ),
     );
   }
@@ -146,6 +258,7 @@ class _MyPalette {
   final Color color3;
   final Color color4;
 }
+
 //GENERATE RANDOM COLORS FOR PLACEHOLDER PALETTES
 Color randomColor () {
   Random random = new Random();

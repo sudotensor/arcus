@@ -87,6 +87,9 @@ class _SearchUnsplashState extends State<SearchUnsplash> {
   Widget build(BuildContext context) {
     return Column(children: <Widget>[
       Container(
+        decoration: BoxDecoration (
+          color: Colors.white,
+        ),
         padding: EdgeInsets.all(16.0),
         child: Row(children: <Widget>[
           Spacer(),
@@ -111,7 +114,10 @@ class _SearchUnsplashState extends State<SearchUnsplash> {
         ]),
       ),
       Expanded(
-          child: SizedBox(
+          child: Container(
+              decoration: BoxDecoration (
+                color: Colors.white,
+              ),
               height: 500,
               child: ListView.builder(
                 scrollDirection: Axis.vertical,

@@ -41,7 +41,7 @@ class _FavouritesState extends State<Favourites> {
 
   Future<void> removePalette (BuildContext context, int id) async {
     final Database db = await openDatabase(join(await getDatabasesPath(), 'favorites.db'));
-    final paletteName = paletteList[id-1].name;
+    final paletteName = paletteList[id].name;
     Scaffold.of(context).showSnackBar(SnackBar(content: Text("Deleting $paletteName...")));
     await db.delete(
       'favorites',
@@ -58,69 +58,79 @@ class _FavouritesState extends State<Favourites> {
     nullify();
     getPrimaryColors();
   }
-
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-        padding: const EdgeInsets.all(8),
-        itemCount: paletteList.length > 0 ? paletteList.length : 0,
-        itemBuilder: (BuildContext context, int index) {
-          return InkWell (
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => PopUpScreen(paletteList, index)),
-              );
-            },
-            child: Container(
-              height: 150,
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.black,
-                  width: 1,
+    return Container (
+        decoration: BoxDecoration(
+          color: Colors.white,
+        ),
+        child: ListView.builder(
+          padding: const EdgeInsets.all(8),
+          itemCount: paletteList.length > 0 ? paletteList.length : 0,
+          itemBuilder: (BuildContext context, int index) {
+            return InkWell (
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => PopUpScreen(paletteList, index)),
+                );
+              },
+              child: Container(
+                height: 150,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Colors.black,
+                    width: 1,
+                  ),
+                  borderRadius: BorderRadius.circular(12),
                 ),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Align(
+                child: Align(
                   alignment: Alignment(0.0, 0.0),
                   child: Column (
                     children: <Widget>[
-                      Row(
-                        children: <Widget> [
-                          Padding(padding: EdgeInsets.all(8.0)),
-                          Text('${paletteList[index].name}', style: TextStyle(decoration: TextDecoration.underline, fontSize: 20.0,)),
-                          Spacer(),
-                          Container(
-                            child: IconButton(
-                              alignment: Alignment.centerRight,
-                              icon: (Icon(Icons.cancel)),
-                              color: Colors.black,
-                              onPressed: () async => await removePalette(context, index+1),
+                      Container(
+                        child: Column (
+                          children: <Widget>[
+                            Row(
+                                children: <Widget> [
+                                  Padding(padding: EdgeInsets.all(8.0)),
+                                  Text('${paletteList[index].name}', style: TextStyle(decoration: TextDecoration.underline, fontSize: 20.0,)),
+                                  Spacer(),
+                                  Container(
+                                    child: IconButton(
+                                      alignment: Alignment.centerRight,
+                                      icon: (Icon(Icons.cancel)),
+                                      color: Colors.black,
+                                      onPressed: () => removePalette(context, index),
+                                    ),
+                                  ),
+                                  Padding(padding: EdgeInsets.all(2.0)),
+                                ]
                             ),
-                          ),
-                          Padding(padding: EdgeInsets.all(2.0)),
-                        ]
-                      ),
-                      Row(
-                        children: <Widget> [
-                          Spacer(),
-                          Box(paletteList[index].color1),
-                          Spacer(),
-                          Box(paletteList[index].color2),
-                          Spacer(),
-                          Box(paletteList[index].color3),
-                          Spacer(),
-                          Box(paletteList[index].color4),
-                          Spacer(),
-                        ]
+                            Row(
+                                children: <Widget> [
+                                  Spacer(),
+                                  Box(paletteList[index].color1),
+                                  Spacer(),
+                                  Box(paletteList[index].color2),
+                                  Spacer(),
+                                  Box(paletteList[index].color3),
+                                  Spacer(),
+                                  Box(paletteList[index].color4),
+                                  Spacer(),
+                                ]
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
+                ),
+                margin: const EdgeInsets.all(5.0),
               ),
-              margin: const EdgeInsets.all(5.0),
-            ),
-          );
-        },
+            );
+          },
+        )
     );
   }
 }

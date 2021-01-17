@@ -1,3 +1,5 @@
+import 'package:hexcolor/hexcolor.dart';
+import 'package:quartet/quartet.dart';
 import 'dart:io';
 import 'package:arcus/color_request.dart';
 import 'package:flutter/material.dart';
@@ -81,7 +83,7 @@ class GalleryAccessState extends State<GalleryAccess> {
                               color: Colors.transparent,
                               child: Container(
                                   decoration: BoxDecoration(
-                                color: Color(0xFFFF6b6b),
+                                color: primaryColors != null ? primaryColors.colors[0] : Colors.transparent,
                                 borderRadius: BorderRadius.all(
                                   Radius.circular(12),
                                 ),
@@ -94,7 +96,7 @@ class GalleryAccessState extends State<GalleryAccess> {
                               color: Colors.transparent,
                               child: Container(
                                   decoration: BoxDecoration(
-                                color: Color(0xFFff922b),
+                                color: primaryColors != null ? primaryColors.colors[1] : Colors.transparent,
                                 borderRadius: BorderRadius.all(
                                   Radius.circular(12),
                                 ),
@@ -107,7 +109,7 @@ class GalleryAccessState extends State<GalleryAccess> {
                               color: Colors.transparent,
                               child: Container(
                                   decoration: BoxDecoration(
-                                color: Color(0xFFFCC417),
+                                color: primaryColors != null ? primaryColors.colors[2] : Colors.transparent,
                                 borderRadius: BorderRadius.all(
                                   Radius.circular(12),
                                 ),
@@ -120,7 +122,7 @@ class GalleryAccessState extends State<GalleryAccess> {
                               color: Colors.transparent,
                               child: Container(
                                   decoration: BoxDecoration(
-                                color: Color(0xFF94d92c),
+                                color: primaryColors != null ? primaryColors.colors[3] : Colors.transparent,
                                 borderRadius: BorderRadius.all(
                                   Radius.circular(12),
                                 ),
@@ -145,7 +147,7 @@ class GalleryAccessState extends State<GalleryAccess> {
                               ),
                               padding: EdgeInsets.symmetric(horizontal: 6),
                               child: FittedBox(
-                                child: Text('#FF6B6B'),
+                                child: Text('${primaryColors != null ? slice(slice('${ColorToHex(primaryColors.colors[0])}', 6), 1, -1) : ''}' , style: TextStyle(color: primaryColors != null ? Colors.black : Colors.transparent)),
                               ),
                             ),
                           )),
@@ -163,7 +165,7 @@ class GalleryAccessState extends State<GalleryAccess> {
                                 ),
                                 padding: EdgeInsets.symmetric(horizontal: 6),
                                 child: FittedBox(
-                                  child: Text('#FF922B'),
+                                  child: Text('${primaryColors != null ? slice(slice('${ColorToHex(primaryColors.colors[1])}', 6), 1, -1) : ''}' , style: TextStyle(color: primaryColors != null ? Colors.black : Colors.transparent)),
                                 ),
                               ))),
                       Flexible(
@@ -180,7 +182,7 @@ class GalleryAccessState extends State<GalleryAccess> {
                                 ),
                                 padding: EdgeInsets.symmetric(horizontal: 6),
                                 child: FittedBox(
-                                  child: Text('#FCC417'),
+                                  child: Text('${primaryColors != null ? slice(slice('${ColorToHex(primaryColors.colors[2])}', 6), 1, -1) : ''}' , style: TextStyle(color: primaryColors != null ? Colors.black : Colors.transparent)),
                                 ),
                               ))),
                       Flexible(
@@ -197,7 +199,7 @@ class GalleryAccessState extends State<GalleryAccess> {
                                 ),
                                 padding: EdgeInsets.symmetric(horizontal: 6),
                                 child: FittedBox(
-                                  child: Text('#94D92C'),
+                                  child: Text('${primaryColors != null ? slice(slice('${ColorToHex(primaryColors.colors[3])}', 6), 1, -1) : ''}' , style: TextStyle(color: primaryColors != null ? Colors.black : Colors.transparent)),
                                 ),
                               ))),
                       Padding(padding: EdgeInsets.symmetric(horizontal: 8.0)),

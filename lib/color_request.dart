@@ -40,32 +40,61 @@ Future<void> insertColors(MyPalette palette, Database database) async {
   );
 }
 
+class Fetcher {
+  static var apiKey;
+
+  static Future<void> getApiKey() async {
+    final response = await http.get("http://dev.humanityandhistory.bgmot.com/gen_key.php");
+    apiKey = response.body;
+    return null;
+  }
+}
+
 Future<PrimaryColors> fetchLocalPalette(var imageFile) async {
   List fileBytes = await imageFile.readAsBytesSync();
   String encodedFile = base64.encode(fileBytes);
   final body = {"requests" : [{"image" : {"content" : "$encodedFile"}, "features" : [{"maxResults" : 4, "type" : "IMAGE_PROPERTIES"}]}]};
-  final token = "ya29.c.Kp0B7gdO1RBfjxxNX_S5_c8GTca88RK0LovCqLdMiO8GetPocnA2KRVV1fPOekIM35mckB7U6mADcpbysVemYb0wGt5Ts_xulWrqDZndnz4spN4KLA_y92Yqrw2rH0Hcl6WnaoubetTiiM3bKxqlTybSEPRkLCKzvQK06rI5p8G5_9HKDULfqnLBsNPyejBJsByCkywSt_DnX-G74Ca8OQ";
+  print(Fetcher.apiKey);
+  final token = Fetcher.apiKey;
   final headers = {"Content-Type": "application/json", "Authorization" : "Bearer $token"};
   final response = await http.post("https://vision.googleapis.com/v1/images:annotate", body: jsonEncode(body), headers: headers);
 
   if (response.statusCode == 200) {
     return PrimaryColors.fromJson(jsonDecode(response.body));
-  } else {
-    print(response.body);
+  } else if (jsonDecode(response.body)["error"]["code"] == 401) {
+    print(Fetcher.apiKey);
+    await Fetcher.getApiKey();
+    return await fetchLocalPalette(imageFile);
+  }else {
     return null;
   }
 }
 
 Future<PrimaryColors> fetchPalette(var imageUri) async {
-  final body = {"requests" : [{"image" : {"source" : {"imageUri" : "$imageUri"}}, "features" : [{"maxResults" : 4, "type" : "IMAGE_PROPERTIES"},]}]};
-  final token = "ya29.c.Kp0B7gdO1RBfjxxNX_S5_c8GTca88RK0LovCqLdMiO8GetPocnA2KRVV1fPOekIM35mckB7U6mADcpbysVemYb0wGt5Ts_xulWrqDZndnz4spN4KLA_y92Yqrw2rH0Hcl6WnaoubetTiiM3bKxqlTybSEPRkLCKzvQK06rI5p8G5_9HKDULfqnLBsNPyejBJsByCkywSt_DnX-G74Ca8OQ";
-  final headers = {"Content-Type": "application/json", "Authorization" : "Bearer $token"};
-  final response = await http.post("https://vision.googleapis.com/v1/images:annotate", body: jsonEncode(body), headers: headers);
+  final body = {
+    "requests": [
+      {
+        "image": {"source": {"imageUri": "$imageUri"}},
+        "features": [{"maxResults": 4, "type": "IMAGE_PROPERTIES"},]
+      }
+    ]
+  };
+  final token = Fetcher.apiKey;
+  final headers = {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer $token"
+  };
+  final response = await http.post(
+      "https://vision.googleapis.com/v1/images:annotate",
+      body: jsonEncode(body), headers: headers);
 
   if (response.statusCode == 200) {
     return PrimaryColors.fromJson(jsonDecode(response.body));
-  } else {
-    print(response.body);
+  } else if (jsonDecode(response.body)["error"]["code"] == 401) {
+    print(Fetcher.apiKey);
+    await Fetcher.getApiKey();
+    return await fetchPalette(imageUri);
+  }else {
     return null;
   }
 }

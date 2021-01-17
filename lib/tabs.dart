@@ -20,6 +20,8 @@ class _MainPageState extends State<MainPage> {
           brightness: Brightness.light,
           primaryColor: Colors.white,
           accentColor: Colors.red[600],
+          highlightColor: Colors.transparent,
+          splashColor: Colors.transparent,
         ),
         home: DefaultTabController(
             length: 4,

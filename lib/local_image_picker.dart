@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:arcus/color_request.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import './palette_page.dart';
 
 class LocalImagePicker extends StatelessWidget {
   @override
@@ -221,8 +222,14 @@ class GalleryAccessState extends State<GalleryAccess> {
                               color: Colors.white.withOpacity(1),
                             ),
                           ),
-                          onPressed: getImage,
-                        ))),
+                          onPressed: (){
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => PalettePage(primaryColors.colors)),
+                            );
+                          },
+                        ))
+                ),
                 Spacer(),
                 SafeArea(
                     minimum: EdgeInsets.symmetric(horizontal: 16),

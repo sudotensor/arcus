@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:io';
+import './palette_page.dart';
+
 
 class SearchImg {
   final String url;
@@ -114,7 +116,7 @@ class _SearchUnsplashState extends State<SearchUnsplash> {
                                 onPressed: (){
                                   Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => PalettePage()),
+                                      MaterialPageRoute(builder: (context) => PalettePage()),
                                   );
                                 },
                               ),
@@ -151,4 +153,5 @@ class _SearchUnsplashState extends State<SearchUnsplash> {
               )))
     ]);
   }
+}
 }

@@ -2,9 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class PalettePage extends StatelessWidget {
-  PalettePage(this.url, this.colors);
+  PalettePage(this.colors);
 
-  final String url;
   final List<dynamic> colors;
 
   @override

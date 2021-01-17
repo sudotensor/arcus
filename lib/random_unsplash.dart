@@ -256,7 +256,7 @@ class _RandomUnsplashState extends State<RandomUnsplash> {
             onPressed: (){
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => PalettePage(futureImg.url, primaryColors.colors)),
+                MaterialPageRoute(builder: (context) => PalettePage(primaryColors.colors)),
               );
             },
           ),

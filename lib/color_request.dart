@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
 
 class PrimaryColors {
-  var colors = [];
+  final colors;
 
   PrimaryColors({this.colors});
 
@@ -26,6 +28,24 @@ class PrimaryColors {
     }
     return PrimaryColors(colors: expCols);
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      "colors1" : colors[0],
+      "colors2" : colors[1],
+      "colors3" : colors[2],
+      "colors4" : colors[3]
+    };
+  }
+}
+
+Future<void> insertColors(PrimaryColors colors, Database database) async {
+  final Database db = await database;
+  await db.insert(
+    'favorites',
+    colors.toMap(),
+    conflictAlgorithm: ConflictAlgorithm.replace
+  );
 }
 
 Future<PrimaryColors> fetchLocalPalette(var imageFile) async {

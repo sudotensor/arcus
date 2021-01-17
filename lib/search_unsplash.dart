@@ -1,3 +1,4 @@
+import 'package:shimmer/shimmer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -123,7 +124,26 @@ class _SearchUnsplashState extends State<SearchUnsplash> {
                         } else if (snapshot.hasError) {
                           return Text('${snapshot.error}');
                         }
-                        return CircularProgressIndicator();
+                        return SizedBox(
+                          child: Shimmer.fromColors(
+                            baseColor: Colors.white,
+                            highlightColor: Colors.grey,
+                            child: Container(
+                              child: Column(
+                                children: <Widget> [
+                                  Container (
+                                    height: 150,
+                                    width: 400,
+                                    decoration: BoxDecoration (
+                                      color: Colors.white.withOpacity(0.4),
+                                    ),
+                                  ),
+                                  Padding(padding: EdgeInsets.all(8.0)),
+                                ]
+                              )
+                            ),
+                          ),
+                        );
                       },
                     ),
                   );

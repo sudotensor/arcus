@@ -49,7 +49,6 @@ class GalleryAccessState extends State<GalleryAccess> {
                       ? Center(
                           child: new Container(
                           height: 300.0,
-                          width: 450.0,
                           color: Colors.transparent,
                           child: Image.asset(
                               'assets/undraw_Organize_photos_re_ogcy.png'),

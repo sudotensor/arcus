@@ -1,3 +1,5 @@
+import 'package:hexcolor/hexcolor.dart';
+import 'package:quartet/quartet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -19,9 +21,9 @@ class RandImg {
 
 Future<RandImg> fetchImg() async {
   final response =
-      await http.get("https://api.unsplash.com/photos/random", headers: {
+  await http.get("https://api.unsplash.com/photos/random", headers: {
     HttpHeaders.authorizationHeader:
-        "Client-ID OC_8GFmPsPUtKdd9yZeKgYhXSZJ3BSBfmyIFUbLaoQ8"
+    "Client-ID OC_8GFmPsPUtKdd9yZeKgYhXSZJ3BSBfmyIFUbLaoQ8"
   });
 
   if (response.statusCode == 200) {
@@ -37,8 +39,32 @@ class RandomUnsplash extends StatefulWidget {
 }
 
 class _RandomUnsplashState extends State<RandomUnsplash> {
-  Future<RandImg> futureImg;
-  Future<PrimaryColors> primaryColors;
+  RandImg futureImg;
+  PrimaryColors primaryColors;
+  var _primaryColorsLen = 4;
+
+  status() async {
+    if(futureImg != null && primaryColors != null) {
+      setState(() {});
+    } else {
+      status();
+    }
+    return null;
+  }
+
+  getImgData() async {
+    futureImg = await fetchImg();
+    primaryColors = await fetchPalette(futureImg.url);
+    status();
+    //setState(() {});
+    return null;
+  }
+
+  refreshVars() {
+    futureImg = null;
+    primaryColors = null;
+    return null;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,46 +72,187 @@ class _RandomUnsplashState extends State<RandomUnsplash> {
       padding: EdgeInsets.all(16.0),
       child: Column(
         children: [
-          FutureBuilder<RandImg>(
-            future: futureImg,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return Column(children: [
-                  Image.network(snapshot.data.url),
-                  FutureBuilder<PrimaryColors>(
-                    future: primaryColors,
-                    builder: (context, snapshot2) {
-                      print(snapshot2);
-                      if (snapshot2.hasData) {
-                        return ListView.builder(
-                          padding: EdgeInsets.all(16.0),
-                          itemCount: snapshot2.data.colors.length,
-                          itemBuilder: (BuildContext context, int i) {
-                            return Text(snapshot2.data.colors[i]);
-                          },
-                        );
-                      } else {
-                        return Text("No Color data");
-                      }
-                    },
-                  )
-                ]);
-              } else if (snapshot.hasError) {
-                return Text('${snapshot.error}');
-              }
-              return CircularProgressIndicator();
+          Column(
+            children: [
+              new Builder(
+                  builder: (BuildContext context) {
+                    // if(futureImg != null) {
+                    //   return Image.network(futureImg.url);
+                    // }
+                    return Text('');
+                  }
+              ),
+            ],
+          ),
+          Spacer(),
+          Row (
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Padding (padding: EdgeInsets.all(15.0)),
+                Container(
+                    height: 100.0,
+                    width: 70.0,
+                    color: Colors.transparent,
+                    child: Container(
+                        decoration: BoxDecoration(
+                          color: primaryColors != null ? primaryColors.colors[0] : Colors.transparent,
+                          borderRadius: BorderRadius.all(Radius.circular(10),
+                          ),
+                        )
+                    )
+                ),
+                Container(
+                    height: 100.0,
+                    width: 70.0,
+                    color: Colors.transparent,
+                    child: Container(
+                        decoration: BoxDecoration(
+                          color: primaryColors != null ? primaryColors.colors[1] : Colors.transparent,
+                          borderRadius: BorderRadius.all(Radius.circular(10),
+                          ),
+                        )
+                    )
+                ),
+                Container(
+                    height: 100.0,
+                    width: 70.0,
+                    color: Colors.transparent,
+                    child: Container(
+                        decoration: BoxDecoration(
+                          color: primaryColors != null ? primaryColors.colors[2] : Colors.transparent,
+                          borderRadius: BorderRadius.all(Radius.circular(10),
+                          ),
+                        )
+                    )
+                ),
+                Container(
+                    height: 100.0,
+                    width: 70.0,
+                    color: Colors.transparent,
+                    child: Container(
+                        decoration: BoxDecoration(
+                          color: primaryColors != null ? primaryColors.colors[3] : Colors.transparent,
+                          borderRadius: BorderRadius.all(Radius.circular(10),
+                          ),
+                        )
+                    )
+                ),
+                Padding (padding: EdgeInsets.all(15.0)),
+              ]
+          ),
+          Padding (padding: EdgeInsets.all(10.0)),
+          Row (
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Padding (padding: EdgeInsets.all(15.0)),
+                Container(
+                  height: 30.0,
+                  width: 70.0,
+                  color: Colors.transparent,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border(
+                        top: BorderSide(width: 1.0, color: Colors.transparent),
+                        left: BorderSide(width: 1.0, color: Colors.transparent),
+                        right: BorderSide(width: 1.0, color: Colors.transparent),
+                        bottom: BorderSide(width: 1.0, color: Colors.transparent),
+                      ),
+                      color: Colors.transparent,
+                      borderRadius: BorderRadius.all(Radius.circular(10),
+                      ),
+                    ),
+                    padding: EdgeInsets.all(7.0),
+                    child: FittedBox(
+                      child: Text('${primaryColors != null ? slice(slice('${ColorToHex(primaryColors.colors[0])}', 6), 1, -1) : ''}' , style: TextStyle(color: primaryColors != null ? Colors.black : Colors.transparent)),
+                    ),
+                  ),
+                ),
+                Container(
+                    height: 30.0,
+                    width: 70.0,
+                    color: Colors.transparent,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border(
+                          top: BorderSide(width: 1.0, color: Colors.transparent),
+                          left: BorderSide(width: 1.0, color: Colors.transparent),
+                          right: BorderSide(width: 1.0, color: Colors.transparent),
+                          bottom: BorderSide(width: 1.0, color: Colors.transparent),
+                        ),
+                        color: Colors.transparent,
+                        borderRadius: BorderRadius.all(Radius.circular(10),
+                        ),
+                      ),
+                      padding: EdgeInsets.all(7.0),
+                      child: FittedBox(
+                        child: Text('${primaryColors != null ? slice(slice('${ColorToHex(primaryColors.colors[1])}', 6), 1, -1) : ''}' , style: TextStyle(color: primaryColors != null ? Colors.black : Colors.transparent)),
+                      ),
+                    )
+                ),
+                Container(
+                    height: 30.0,
+                    width: 70.0,
+                    color: Colors.transparent,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border(
+                          top: BorderSide(width: 1.0, color: Colors.transparent),
+                          left: BorderSide(width: 1.0, color: Colors.transparent),
+                          right: BorderSide(width: 1.0, color: Colors.transparent),
+                          bottom: BorderSide(width: 1.0, color: Colors.transparent),
+                        ),
+                        color: Colors.transparent,
+                        borderRadius: BorderRadius.all(Radius.circular(10),
+                        ),
+                      ),
+                      padding: EdgeInsets.all(7.0),
+                      child: FittedBox(
+                        child: Text('${primaryColors != null ? slice(slice('${ColorToHex(primaryColors.colors[2])}', 6), 1, -1) : ''}' , style: TextStyle(color: primaryColors != null ? Colors.black : Colors.transparent)),
+                      ),
+                    )
+                ),
+                Container(
+                    height: 30.0,
+                    width: 70.0,
+                    color: Colors.transparent,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border(
+                          top: BorderSide(width: 1.0, color: Colors.transparent),
+                          left: BorderSide(width: 1.0, color: Colors.transparent),
+                          right: BorderSide(width: 1.0, color: Colors.transparent),
+                          bottom: BorderSide(width: 1.0, color: Colors.transparent),
+                        ),
+                        color: Colors.transparent,
+                        borderRadius: BorderRadius.all(Radius.circular(10),
+                        ),
+                      ),
+                      padding: EdgeInsets.all(7.0),
+                      child: FittedBox(
+                        child: Text('${primaryColors != null ? slice(slice('${ColorToHex(primaryColors.colors[3])}', 6), 1, -1) : ''}' , style: TextStyle(color: primaryColors != null ? Colors.black : Colors.transparent)),
+                      ),
+                    )
+                ),
+                Padding (padding: EdgeInsets.all(15.0)),
+              ]
+          ),
+          Padding (padding: EdgeInsets.all(15.0)),
+          new ElevatedButton(
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all<Color>(Colors.lightBlue),
+            ),
+            child: new Text(
+              '                           Generate New Palette                           ',
+              style: TextStyle(color: Colors.black.withOpacity(1),
+              ),
+            ),
+            onPressed: () {
+              refreshVars();
+              Scaffold.of(context).showSnackBar(SnackBar(content: Text("Loading Image...")));
+              getImgData();
             },
           ),
-          OutlinedButton(
-            onPressed: () async {
-              futureImg = fetchImg();
-              futureImg.then((value) {
-                primaryColors = fetchPalette(value.url);
-              });
-              setState(() {});
-            },
-            child: Icon(Icons.refresh),
-          )
+          Padding (padding: EdgeInsets.all(20.0)),
         ],
       ),
     );

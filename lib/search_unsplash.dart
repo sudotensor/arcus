@@ -20,7 +20,7 @@ Future<SearchImg> fetchImg(var search, var i) async {
   final response = await http
       .get("https://api.unsplash.com/search/photos?query={$search}", headers: {
     HttpHeaders.authorizationHeader:
-        "Client-ID OC_8GFmPsPUtKdd9yZeKgYhXSZJ3BSBfmyIFUbLaoQ8"
+    "Client-ID OC_8GFmPsPUtKdd9yZeKgYhXSZJ3BSBfmyIFUbLaoQ8"
   });
 
   if (response.statusCode == 200) {
@@ -95,7 +95,23 @@ class _SearchUnsplashState extends State<SearchUnsplash> {
                       future: searchImgs[index],
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
-                          return Image.network(snapshot.data.url);
+                          return Column(
+                            children: [
+                              Image.network(snapshot.data.url),
+                              ElevatedButton(
+                                style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
+                                ),
+                                child: new Text(
+                                  '                             Create New Palette                             ',
+                                  style: TextStyle(color: Colors.black.withOpacity(1),
+                                  ),
+                                ),
+                                //onPressed: getImage,
+                              ),
+                            ],
+                          );
+
                         } else if (snapshot.hasError) {
                           return Text('${snapshot.error}');
                         }

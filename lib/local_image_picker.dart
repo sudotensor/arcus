@@ -62,14 +62,16 @@ class GalleryAccessState extends State<GalleryAccess> {
                           child: new Container(
                           height: 300.0,
                           color: Colors.transparent,
-                          child: Image.asset(
-                              'assets/undraw_Organize_photos_re_ogcy.png'),
+                          child: Container (
+                            height: MediaQuery.of(context).size.height*0.2,
+                            child: Image.asset(
+                              'assets/undraw_Organize_photos_re_ogcy.png', fit: BoxFit.fitHeight,),
+                          )
                         ))
                       : Center(
-                      child: SizedBox(
-                        width: 400.0,
-                        height: 400.0,
-                        child: Image.file(galleryFile),
+                      child: Container(
+                        height: MediaQuery.of(context).size.height*0.4,
+                        child: Image.file(galleryFile,fit: BoxFit.fitWidth,),
                       ),
                   ),
                 ),

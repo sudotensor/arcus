@@ -23,7 +23,7 @@ Future<SearchImg> fetchImg(var search, var i) async {
   final response = await http
       .get("https://api.unsplash.com/search/photos?query={$search}", headers: {
     HttpHeaders.authorizationHeader:
-        "Client-ID OC_8GFmPsPUtKdd9yZeKgYhXSZJ3BSBfmyIFUbLaoQ8"
+        "Client-ID 7kXNn32J4W0djMR3eCOr96yVet3FTKw7Pl3GRk8SIeA"
   });
 
   if (response.statusCode == 200) {
@@ -40,13 +40,14 @@ class SearchUnsplash extends StatefulWidget {
 
 class _SearchUnsplashState extends State<SearchUnsplash> {
   List<SearchImg> searchImgs = <SearchImg>[];
-  final int _numImgs = 5;
+  final int numImgs = 5;
   var searchTerm = "";
   final searchController = TextEditingController();
   PrimaryColors primaryColors;
 
   status() async {
     if (searchImgs[0] != null) {
+      print("yeah");
       setState(() {});
     } else {
       status();
@@ -55,7 +56,7 @@ class _SearchUnsplashState extends State<SearchUnsplash> {
   }
 
   getContent() async {
-    for (var i = 0; i < _numImgs; i++) {
+    for (var i = 0; i < numImgs; i++) {
       searchImgs[i] = await fetchImg(searchTerm, i);
     }
     status();
@@ -76,7 +77,7 @@ class _SearchUnsplashState extends State<SearchUnsplash> {
   void initState() {
     super.initState();
     if (searchImgs.length == 0) {
-      for (var i = 0; i < _numImgs; i++) {
+      for (var i = 0; i < numImgs; i++) {
         searchImgs.add(null);
       }
     }
@@ -103,7 +104,8 @@ class _SearchUnsplashState extends State<SearchUnsplash> {
               child: FlatButton(
                 onPressed: () {
                   searchTerm = searchController.text;
-                  Scaffold.of(context).showSnackBar(SnackBar(content: Text("Loading Images...")));
+                  Scaffold.of(context).showSnackBar(
+                      SnackBar(content: Text("Loading Images...")));
                   getContent();
                 },
                 child: Icon(Icons.search, size: 50),
@@ -120,75 +122,84 @@ class _SearchUnsplashState extends State<SearchUnsplash> {
               child: ListView.builder(
                 scrollDirection: Axis.vertical,
                 padding: EdgeInsets.all(16.0),
-                itemCount: _numImgs,
+                itemCount: numImgs,
                 itemBuilder: (BuildContext context, int index) {
                   return Column(
                     children: [
-                      searchImgs[index] != null ? Image.network(searchImgs[index].url)
-                      : SizedBox(
-                        child: Shimmer.fromColors (
-                          baseColor: Colors.white,
-                          highlightColor: Colors.grey,
-                          child: Container (
-                            child: Column(
-                              children: <Widget> [
-                                Container (
-                                  height: 150,
-                                  width: 400,
-                                  decoration: BoxDecoration (
-                                    color: Colors.white.withOpacity(0.4),
+                      searchImgs[index] != null
+                          ? Image.network(searchImgs[index].url)
+                          : SizedBox(
+                              child: Shimmer.fromColors(
+                                baseColor: Colors.white,
+                                highlightColor: Colors.grey,
+                                child: Container(
+                                  child: Column(
+                                    children: <Widget>[
+                                      Container(
+                                        height: 150,
+                                        width: 400,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white.withOpacity(0.4),
+                                        ),
+                                      ),
+                                      Padding(padding: EdgeInsets.all(8.0)),
+                                    ],
                                   ),
                                 ),
-                                Padding(padding: EdgeInsets.all(8.0)),
-                              ],
+                              ),
                             ),
-                          ),
-                        ),
-                      ),
-                      searchImgs[index] != null ? FlatButton(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.0)),
-                        color: Colors.black,
-                        child: new Text(
-                          'Create New Palette',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.white.withOpacity(1),
-                          ),
-                        ),
-                        //onPressed: getImage,
-                        onPressed: () async {
-                          Scaffold.of(context).showSnackBar(SnackBar(content: Text("Loading Palette...")));
-                            await getPrimaryColors(searchImgs[index]);
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      PalettePage(colors: primaryColors.colors)),
-                            );
-                        },
-                      )
-                      : SizedBox (
-                        child: Shimmer.fromColors(
-                          baseColor: Colors.white,
-                          highlightColor: Colors.grey,
-                          child: Container(
-                            child: Column(
-                              children: <Widget> [
-                                Container(
-                                  height: 150,
-                                  width: 400,
-                                  decoration: BoxDecoration (
-                                    color: Colors.white.withOpacity(0.4),
+                      searchImgs[index] != null
+                          ? FlatButton(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8.0)),
+                              color: Colors.black,
+                              child: new Text(
+                                'Create New Palette',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Colors.white.withOpacity(1),
+                                ),
+                              ),
+                              //onPressed: getImage,
+                              onPressed: () async {
+                                Scaffold.of(context).showSnackBar(SnackBar(
+                                    content: Text("Loading Palette...")));
+                                await getPrimaryColors(searchImgs[index]);
+                                if(primaryColors != null) {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            PalettePage(
+                                                colors: primaryColors.colors)),
+                                  );
+                                } else {
+                                  Scaffold.of(context).showSnackBar(SnackBar(
+                                      content: Text("Image too big!")));
+                                }
+                              },
+                            )
+                          : SizedBox(
+                              child: Shimmer.fromColors(
+                                baseColor: Colors.white,
+                                highlightColor: Colors.grey,
+                                child: Container(
+                                  child: Column(
+                                    children: <Widget>[
+                                      Container(
+                                        height: 150,
+                                        width: 400,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white.withOpacity(0.4),
+                                        ),
+                                      ),
+                                      Padding(padding: EdgeInsets.all(8.0)),
+                                    ],
                                   ),
                                 ),
-                                Padding(padding: EdgeInsets.all(8.0)),
-                              ],
+                              ),
                             ),
-                          ),
-                        ),
-                      ),
-                     ],
+                    ],
                   );
                 },
               )))

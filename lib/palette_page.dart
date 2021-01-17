@@ -211,9 +211,9 @@ class _PalettePageState extends State<PalettePage> {
                   ),
                 ),
                 onPressed: () async {
-                  final Future<Database> db = openDatabase(join(await getDatabasesPath(), 'favorites.db'));
+                  final Database db = await openDatabase(join(await getDatabasesPath(), 'favorites.db'));
                   final palette = MyPalette(nameController.text, widget.colors[0], widget.colors[1], widget.colors[2], widget.colors[3]);
-                  await insertColors(palette, await db);
+                  await insertColors(palette, db).then((value) => db.close());
                   Navigator.pop(context);
                 },
               ),

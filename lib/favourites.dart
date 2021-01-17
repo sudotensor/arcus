@@ -1,14 +1,10 @@
-import 'package:arcus/color_request.dart';
 import 'package:flutter/material.dart';
-import 'dart:math';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:quartet/quartet.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
 class Favourites extends StatefulWidget {
-  final Database db;
-  const Favourites({Key key, this.db}) : super(key: key);
   @override
   _FavouritesState createState() => _FavouritesState();
 }
@@ -17,7 +13,7 @@ class _FavouritesState extends State<Favourites> {
   List<MyPalette> paletteList = [];
 
   status() async {
-    if(paletteList.length > 1) {
+    if(paletteList.length > 0) {
       setState(() {});
     } else {
       getPrimaryColors();
@@ -26,9 +22,13 @@ class _FavouritesState extends State<Favourites> {
 
   getPrimaryColors() async {
     final palettesArr = await palettes();
-    if(paletteList.length < 1) {
-      for (var i = 0; i < palettesArr.length; i++) {
-        paletteList.add(palettesArr[i]);
+    if(paletteList.length == 0) {
+      if(palettesArr.length != 0) {
+        for (var i = 0; i < palettesArr.length; i++) {
+          paletteList.add(palettesArr[i]);
+        }
+      } else {
+        return null;
       }
     }
     status();
@@ -37,6 +37,19 @@ class _FavouritesState extends State<Favourites> {
 
   nullify() {
     paletteList = [];
+  }
+
+  Future<void> removePalette (BuildContext context, int id) async {
+    final Database db = await openDatabase(join(await getDatabasesPath(), 'favorites.db'));
+    final paletteName = paletteList[id-1].name;
+    Scaffold.of(context).showSnackBar(SnackBar(content: Text("Deleting $paletteName...")));
+    await db.delete(
+      'favorites',
+      where: "name = ?",
+      whereArgs: [paletteName]
+    ).then((value) => db.close());
+    nullify();
+    getPrimaryColors();
   }
 
   @override
@@ -82,7 +95,7 @@ class _FavouritesState extends State<Favourites> {
                               alignment: Alignment.centerRight,
                               icon: (Icon(Icons.cancel)),
                               color: Colors.black,
-                              onPressed: () => _removePalette(index),
+                              onPressed: () async => await removePalette(context, index+1),
                             ),
                           ),
                           Padding(padding: EdgeInsets.all(2.0)),
@@ -109,12 +122,6 @@ class _FavouritesState extends State<Favourites> {
           );
         },
     );
-  }
-// Function that removes a selected palette
-  void _removePalette (index) {
-    setState((){
-      paletteList.removeAt(index);
-    });
   }
 }
 

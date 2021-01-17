@@ -26,6 +26,7 @@ dependencies:
   image_picker:
   http: ^0.12.2
   tab_indicator_styler: ^1.0.0
+  flutter_native_splash: ^0.2.6
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -38,6 +39,10 @@ dev_dependencies:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
+
+flutter_native_splash:
+  image: assets/images/splash.png
+  color: "ffffff"
 
 # The following section is specific to Flutter.
 flutter:

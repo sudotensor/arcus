@@ -6,7 +6,6 @@ import 'dart:convert';
 import 'dart:io';
 import './palette_page.dart';
 
-
 class SearchImg {
   final String url;
 
@@ -114,10 +113,10 @@ class _SearchUnsplashState extends State<SearchUnsplash> {
                                 ),
                                 //onPressed: getImage,
                                 onPressed: (){
-                                  Navigator.push(
-                                    context,
-                                      MaterialPageRoute(builder: (context) => PalettePage(primaryColors.colors),
-                                  );
+                                  // Navigator.push(
+                                  //   context,
+                                  //     MaterialPageRoute(builder: (context) => primaryColors != null ? PalettePage(primaryColors.colors) : null),
+                                  // );
                                 },
                               ),
                             ],

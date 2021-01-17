@@ -7,7 +7,6 @@ import 'dart:convert';
 import 'dart:io';
 import './palette_page.dart';
 
-
 class SearchImg {
   final String url;
 
@@ -24,7 +23,7 @@ Future<SearchImg> fetchImg(var search, var i) async {
   final response = await http
       .get("https://api.unsplash.com/search/photos?query={$search}", headers: {
     HttpHeaders.authorizationHeader:
-    "Client-ID 7kXNn32J4W0djMR3eCOr96yVet3FTKw7Pl3GRk8SIeA"
+        "Client-ID 7kXNn32J4W0djMR3eCOr96yVet3FTKw7Pl3GRk8SIeA"
   });
 
   if (response.statusCode == 200) {
@@ -40,11 +39,32 @@ class SearchUnsplash extends StatefulWidget {
 }
 
 class _SearchUnsplashState extends State<SearchUnsplash> {
-  List<Future<SearchImg>> searchImgs = <Future<SearchImg>>[];
+  List<SearchImg> searchImgs = <SearchImg>[];
   final int _numImgs = 5;
   var searchTerm = "";
   final searchController = TextEditingController();
   PrimaryColors primaryColors;
+
+  status() async {
+    if (searchImgs[0] != null) {
+      setState(() {});
+    } else {
+      status();
+    }
+    return null;
+  }
+
+  getContent() async {
+    for (var i = 0; i < _numImgs; i++) {
+      searchImgs[i] = await fetchImg(searchTerm, i);
+    }
+    status();
+    return null;
+  }
+
+  getPrimaryColors(SearchImg searchImg) async {
+    primaryColors = await fetchPalette(searchImg.url);
+  }
 
   @override
   void dispose() {
@@ -78,10 +98,8 @@ class _SearchUnsplashState extends State<SearchUnsplash> {
               child: FlatButton(
                 onPressed: () {
                   searchTerm = searchController.text;
-                  for (var i = 0; i < _numImgs; i++) {
-                    searchImgs[i] = fetchImg(searchTerm, i);
-                  }
-                  setState(() {});
+                  Scaffold.of(context).showSnackBar(SnackBar(content: Text("Loading Images...")));
+                  getContent();
                 },
                 child: Icon(Icons.search),
               ))
@@ -95,65 +113,36 @@ class _SearchUnsplashState extends State<SearchUnsplash> {
                 padding: EdgeInsets.all(16.0),
                 itemCount: _numImgs,
                 itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                    child: FutureBuilder<SearchImg>(
-                      future: searchImgs[index],
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData) {
-                          return Column(
-                            children: [
-                              Image.network(snapshot.data.url),
-                              FlatButton(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8.0)),
-                                color: Colors.black,
-                                child: new Text(
-                                  'Create New Palette',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Colors.white.withOpacity(1),
-                                  ),
-                                ),
-                                //onPressed: getImage,
-                                onPressed: (){
-                                  Navigator.push(
-                                    context,
-                                      MaterialPageRoute(builder: (context) => PalettePage(primaryColors.colors)),
-                                  );
-                                },
-                              ),
-                            ],
-                          );
-
-                        } else if (snapshot.hasError) {
-                          return Text('${snapshot.error}');
-                        }
-                        return SizedBox(
-                          child: Shimmer.fromColors(
-                            baseColor: Colors.white,
-                            highlightColor: Colors.grey,
-                            child: Container(
-                              child: Column(
-                                children: <Widget> [
-                                  Container (
-                                    height: 150,
-                                    width: 400,
-                                    decoration: BoxDecoration (
-                                      color: Colors.white.withOpacity(0.4),
-                                    ),
-                                  ),
-                                  Padding(padding: EdgeInsets.all(8.0)),
-                                ]
-                              )
-                            ),
+                  return Column(
+                    children: [
+                      searchImgs[index] != null ? Image.network(searchImgs[index].url) : Text(""), //TODO -- ADD SHIMMER instead of TEXT
+                      searchImgs[index] != null ? FlatButton(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.0)),
+                        color: Colors.black,
+                        child: new Text(
+                          'Create New Palette',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white.withOpacity(1),
                           ),
-                        );
-                      },
-                    ),
+                        ),
+                        //onPressed: getImage,
+                        onPressed: () async {
+                          Scaffold.of(context).showSnackBar(SnackBar(content: Text("Loading Palette...")));
+                            await getPrimaryColors(searchImgs[index]);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PalettePage(primaryColors.colors)),
+                            );
+                        },
+                      ) : Text(""),//TODO -- ADD SHIMMER HERE TOO
+                     ],
                   );
                 },
               )))
     ]);
   }
 }
-

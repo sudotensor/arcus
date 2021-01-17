@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:io';
 import './color_request.dart';
+import './palette_page.dart';
 
 class RandImg {
   final String url;
@@ -255,7 +256,7 @@ class _RandomUnsplashState extends State<RandomUnsplash> {
             onPressed: (){
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => PalettePage()),
+                MaterialPageRoute(builder: (context) => PalettePage(futureImg.url, primaryColors.colors)),
               );
             },
           ),
@@ -277,34 +278,6 @@ class _RandomUnsplashState extends State<RandomUnsplash> {
             },
           ),
         ],
-      ),
-    );
-  }
-}
-
-class PalettePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Palette Page"),
-      ),
-      body: Center(
-        child: FlatButton(
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8.0)),
-          color: Colors.black,
-          child: new Text(
-            'Go back',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.white.withOpacity(1),
-            ),
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
       ),
     );
   }

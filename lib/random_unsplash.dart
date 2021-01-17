@@ -1,3 +1,5 @@
+import 'package:hexcolor/hexcolor.dart';
+import 'package:quartet/quartet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -19,9 +21,9 @@ class RandImg {
 
 Future<RandImg> fetchImg() async {
   final response =
-      await http.get("https://api.unsplash.com/photos/random", headers: {
+  await http.get("https://api.unsplash.com/photos/random", headers: {
     HttpHeaders.authorizationHeader:
-        "Client-ID OC_8GFmPsPUtKdd9yZeKgYhXSZJ3BSBfmyIFUbLaoQ8"
+    "Client-ID OC_8GFmPsPUtKdd9yZeKgYhXSZJ3BSBfmyIFUbLaoQ8"
   });
 
   if (response.statusCode == 200) {
@@ -74,34 +76,183 @@ class _RandomUnsplashState extends State<RandomUnsplash> {
             children: [
               new Builder(
                   builder: (BuildContext context) {
-              if(futureImg != null) {
-                return Image.network(futureImg.url);
-              }
-              return Text("Click button to load image");
-            }
-            ),
-              ListView.builder(
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                padding: EdgeInsets.all(4.0),
-                itemCount: _primaryColorsLen,
-                itemBuilder: (BuildContext context, int i) {
-                  if(primaryColors != null) {
-                    return Icon(Icons.circle, color: primaryColors.colors[i]);
+                    // if(futureImg != null) {
+                    //   return Image.network(futureImg.url);
+                    // }
+                    return Text('');
                   }
-                  return Text("");
-                },
-              )
+              ),
             ],
           ),
-          OutlinedButton(
+          Spacer(),
+          Row (
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Padding (padding: EdgeInsets.all(15.0)),
+                Container(
+                    height: 100.0,
+                    width: 70.0,
+                    color: Colors.transparent,
+                    child: Container(
+                        decoration: BoxDecoration(
+                          color: primaryColors != null ? primaryColors.colors[0] : Colors.transparent,
+                          borderRadius: BorderRadius.all(Radius.circular(10),
+                          ),
+                        )
+                    )
+                ),
+                Container(
+                    height: 100.0,
+                    width: 70.0,
+                    color: Colors.transparent,
+                    child: Container(
+                        decoration: BoxDecoration(
+                          color: primaryColors != null ? primaryColors.colors[1] : Colors.transparent,
+                          borderRadius: BorderRadius.all(Radius.circular(10),
+                          ),
+                        )
+                    )
+                ),
+                Container(
+                    height: 100.0,
+                    width: 70.0,
+                    color: Colors.transparent,
+                    child: Container(
+                        decoration: BoxDecoration(
+                          color: primaryColors != null ? primaryColors.colors[2] : Colors.transparent,
+                          borderRadius: BorderRadius.all(Radius.circular(10),
+                          ),
+                        )
+                    )
+                ),
+                Container(
+                    height: 100.0,
+                    width: 70.0,
+                    color: Colors.transparent,
+                    child: Container(
+                        decoration: BoxDecoration(
+                          color: primaryColors != null ? primaryColors.colors[3] : Colors.transparent,
+                          borderRadius: BorderRadius.all(Radius.circular(10),
+                          ),
+                        )
+                    )
+                ),
+                Padding (padding: EdgeInsets.all(15.0)),
+              ]
+          ),
+          Padding (padding: EdgeInsets.all(10.0)),
+          Row (
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Padding (padding: EdgeInsets.all(15.0)),
+                Container(
+                  height: 30.0,
+                  width: 70.0,
+                  color: Colors.transparent,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border(
+                        top: BorderSide(width: 1.0, color: Colors.transparent),
+                        left: BorderSide(width: 1.0, color: Colors.transparent),
+                        right: BorderSide(width: 1.0, color: Colors.transparent),
+                        bottom: BorderSide(width: 1.0, color: Colors.transparent),
+                      ),
+                      color: Colors.transparent,
+                      borderRadius: BorderRadius.all(Radius.circular(10),
+                      ),
+                    ),
+                    padding: EdgeInsets.all(7.0),
+                    child: FittedBox(
+                      child: Text('${primaryColors != null ? slice(slice('${ColorToHex(primaryColors.colors[0])}', 6), 1, -1) : ''}' , style: TextStyle(color: primaryColors != null ? Colors.black : Colors.transparent)),
+                    ),
+                  ),
+                ),
+                Container(
+                    height: 30.0,
+                    width: 70.0,
+                    color: Colors.transparent,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border(
+                          top: BorderSide(width: 1.0, color: Colors.transparent),
+                          left: BorderSide(width: 1.0, color: Colors.transparent),
+                          right: BorderSide(width: 1.0, color: Colors.transparent),
+                          bottom: BorderSide(width: 1.0, color: Colors.transparent),
+                        ),
+                        color: Colors.transparent,
+                        borderRadius: BorderRadius.all(Radius.circular(10),
+                        ),
+                      ),
+                      padding: EdgeInsets.all(7.0),
+                      child: FittedBox(
+                        child: Text('${primaryColors != null ? slice(slice('${ColorToHex(primaryColors.colors[1])}', 6), 1, -1) : ''}' , style: TextStyle(color: primaryColors != null ? Colors.black : Colors.transparent)),
+                      ),
+                    )
+                ),
+                Container(
+                    height: 30.0,
+                    width: 70.0,
+                    color: Colors.transparent,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border(
+                          top: BorderSide(width: 1.0, color: Colors.transparent),
+                          left: BorderSide(width: 1.0, color: Colors.transparent),
+                          right: BorderSide(width: 1.0, color: Colors.transparent),
+                          bottom: BorderSide(width: 1.0, color: Colors.transparent),
+                        ),
+                        color: Colors.transparent,
+                        borderRadius: BorderRadius.all(Radius.circular(10),
+                        ),
+                      ),
+                      padding: EdgeInsets.all(7.0),
+                      child: FittedBox(
+                        child: Text('${primaryColors != null ? slice(slice('${ColorToHex(primaryColors.colors[2])}', 6), 1, -1) : ''}' , style: TextStyle(color: primaryColors != null ? Colors.black : Colors.transparent)),
+                      ),
+                    )
+                ),
+                Container(
+                    height: 30.0,
+                    width: 70.0,
+                    color: Colors.transparent,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border(
+                          top: BorderSide(width: 1.0, color: Colors.transparent),
+                          left: BorderSide(width: 1.0, color: Colors.transparent),
+                          right: BorderSide(width: 1.0, color: Colors.transparent),
+                          bottom: BorderSide(width: 1.0, color: Colors.transparent),
+                        ),
+                        color: Colors.transparent,
+                        borderRadius: BorderRadius.all(Radius.circular(10),
+                        ),
+                      ),
+                      padding: EdgeInsets.all(7.0),
+                      child: FittedBox(
+                        child: Text('${primaryColors != null ? slice(slice('${ColorToHex(primaryColors.colors[3])}', 6), 1, -1) : ''}' , style: TextStyle(color: primaryColors != null ? Colors.black : Colors.transparent)),
+                      ),
+                    )
+                ),
+                Padding (padding: EdgeInsets.all(15.0)),
+              ]
+          ),
+          Padding (padding: EdgeInsets.all(15.0)),
+          new ElevatedButton(
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all<Color>(Colors.lightBlue),
+            ),
+            child: new Text(
+              '                           Generate New Palette                           ',
+              style: TextStyle(color: Colors.black.withOpacity(1),
+              ),
+            ),
             onPressed: () {
               refreshVars();
               Scaffold.of(context).showSnackBar(SnackBar(content: Text("Loading Image...")));
               getImgData();
             },
-            child: Text('Generate New Image'),
-          )
+          ),
+          Padding (padding: EdgeInsets.all(20.0)),
         ],
       ),
     );

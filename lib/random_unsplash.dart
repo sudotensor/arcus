@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -37,6 +38,7 @@ class RandomUnsplash extends StatefulWidget {
 
 class _RandomUnsplashState extends State<RandomUnsplash> {
   Future<RandImg> futureImg;
+  Future<PrimaryColors> primaryColors;
 
   @override
   Widget build(BuildContext context) {
@@ -48,9 +50,26 @@ class _RandomUnsplashState extends State<RandomUnsplash> {
             future: futureImg,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                var fetched = fetchPalette(snapshot.data.url);
-                print('Var: {$fetched}');
-                return Image.network(snapshot.data.url);
+                return Column(children: [
+                  Image.network(snapshot.data.url),
+                  FutureBuilder<PrimaryColors>(
+                    future: primaryColors,
+                    builder: (context, snapshot2) {
+                      print(snapshot2);
+                      if (snapshot2.hasData) {
+                        return ListView.builder(
+                          padding: EdgeInsets.all(16.0),
+                          itemCount: snapshot2.data.colors.length,
+                          itemBuilder: (BuildContext context, int i) {
+                            return Text(snapshot2.data.colors[i]);
+                          },
+                        );
+                      } else {
+                        return Text("No Color data");
+                      }
+                    },
+                  )
+                ]);
               } else if (snapshot.hasError) {
                 return Text('${snapshot.error}');
               }
@@ -58,8 +77,11 @@ class _RandomUnsplashState extends State<RandomUnsplash> {
             },
           ),
           OutlinedButton(
-            onPressed: () {
+            onPressed: () async {
               futureImg = fetchImg();
+              futureImg.then((value) {
+                primaryColors = fetchPalette(value.url);
+              });
               setState(() {});
             },
             child: Icon(Icons.refresh),

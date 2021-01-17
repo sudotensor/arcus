@@ -24,7 +24,7 @@ Future<SearchImg> fetchImg(var search, var i) async {
   final response = await http
       .get("https://api.unsplash.com/search/photos?query={$search}", headers: {
     HttpHeaders.authorizationHeader:
-    "Client-ID OC_8GFmPsPUtKdd9yZeKgYhXSZJ3BSBfmyIFUbLaoQ8"
+    "Client-ID 7kXNn32J4W0djMR3eCOr96yVet3FTKw7Pl3GRk8SIeA"
   });
 
   if (response.statusCode == 200) {
@@ -118,7 +118,7 @@ class _SearchUnsplashState extends State<SearchUnsplash> {
                                 onPressed: (){
                                   Navigator.push(
                                     context,
-                                      MaterialPageRoute(builder: (context) => primaryColors != null ? PalettePage(primaryColors.colors)),
+                                      MaterialPageRoute(builder: (context) => PalettePage(primaryColors.colors)),
                                   );
                                 },
                               ),
@@ -156,4 +156,4 @@ class _SearchUnsplashState extends State<SearchUnsplash> {
     ]);
   }
 }
-}
+

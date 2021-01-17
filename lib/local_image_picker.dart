@@ -225,7 +225,7 @@ class GalleryAccessState extends State<GalleryAccess> {
                           onPressed: (){
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => primaryColors != null ? PalettePage(primaryColors.colors) : null),
+                              MaterialPageRoute(builder: (context) => PalettePage(primaryColors.colors)),
                             );
                           },
                         ))

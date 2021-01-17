@@ -19,7 +19,7 @@ class _FavouritesState extends State<Favourites> {
   @override
   void initState() {
     super.initState();
-    getDogs();
+    getPrimaryColors();
   }
 
   @override

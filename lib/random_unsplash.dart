@@ -100,7 +100,7 @@ class _RandomUnsplashState extends State<RandomUnsplash> {
               Scaffold.of(context).showSnackBar(SnackBar(content: Text("Loading Image...")));
               getImgData();
             },
-            child: Icon(Icons.refresh),
+            child: Text('Generate New Image'),
           )
         ],
       ),

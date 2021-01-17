@@ -18,7 +18,6 @@ class _FavouritesState extends State<Favourites> {
 
   status() async {
     if(paletteList.length > 1) {
-      print(paletteList.length);
       setState(() {});
     } else {
       getPrimaryColors();
@@ -43,7 +42,6 @@ class _FavouritesState extends State<Favourites> {
   @override
   void initState() {
     super.initState();
-    print("here yo");
     nullify();
     getPrimaryColors();
   }

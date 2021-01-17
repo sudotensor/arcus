@@ -60,7 +60,7 @@ class _PalettePageState extends State<PalettePage> {
                       child: Container(
                           decoration: BoxDecoration(
                         color: widget.colors != null
-                            ? widget.colors[2]
+                            ? widget.colors[1]
                             : Colors.transparent,
                         borderRadius: BorderRadius.all(
                           Radius.circular(12),

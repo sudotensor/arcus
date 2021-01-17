@@ -62,7 +62,7 @@ class GalleryAccessState extends State<GalleryAccess> {
                   children: <Widget>[
                     Padding (padding: EdgeInsets.all(15.0)),
                     Container(
-                      height: 180.0,
+                      height: 140.0,
                       width: 70.0,
                       color: Colors.transparent,
                       child: Container(
@@ -75,7 +75,7 @@ class GalleryAccessState extends State<GalleryAccess> {
                     ),
                     Padding (padding: EdgeInsets.all(10.0)),
                     Container(
-                        height: 180.0,
+                        height: 140.0,
                         width: 70.0,
                         color: Colors.transparent,
                         child: Container(
@@ -88,7 +88,7 @@ class GalleryAccessState extends State<GalleryAccess> {
                     ),
                     Padding (padding: EdgeInsets.all(10.0)),
                     Container(
-                        height: 180.0,
+                        height: 140.0,
                         width: 70.0,
                         color: Colors.transparent,
                         child: Container(
@@ -101,7 +101,7 @@ class GalleryAccessState extends State<GalleryAccess> {
                     ),
                     Padding (padding: EdgeInsets.all(10.0)),
                     Container(
-                        height: 180.0,
+                        height: 140.0,
                         width: 70.0,
                         color: Colors.transparent,
                         child: Container(
@@ -222,13 +222,3 @@ class GalleryAccessState extends State<GalleryAccess> {
     );
   }
 }
-//Padding (padding: EdgeInsets.all(20.0)),
-// Container (
-//   height: 150.0,
-//   width: 100.0,
-//   color: Colors.transparent,
-//   child: Container(
-//     decoration: BoxDecoration(
-//         color: Colors.black,
-//         borderRadius: BorderRadius.all(Radius.circular(0))),
-// ),

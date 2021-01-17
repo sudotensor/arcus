@@ -13,6 +13,17 @@ class _FavouritesState extends State<Favourites> {
     _MyPalette('Palette2', randomColor(), randomColor(), randomColor(), randomColor()),
     _MyPalette('Palette3', randomColor(), randomColor(), randomColor(), randomColor()),
     _MyPalette('Palette4', randomColor(), randomColor(), randomColor(), randomColor()),
+    _MyPalette('Palette5', randomColor(), randomColor(), randomColor(), randomColor()),
+    _MyPalette('Palette6', randomColor(), randomColor(), randomColor(), randomColor()),
+    _MyPalette('Palette7', randomColor(), randomColor(), randomColor(), randomColor()),
+    _MyPalette('Palette8', randomColor(), randomColor(), randomColor(), randomColor()),
+    _MyPalette('Palette9', randomColor(), randomColor(), randomColor(), randomColor()),
+    _MyPalette('Palette10', randomColor(), randomColor(), randomColor(), randomColor()),
+    _MyPalette('Palette11', randomColor(), randomColor(), randomColor(), randomColor()),
+    _MyPalette('Palette12', randomColor(), randomColor(), randomColor(), randomColor()),
+    _MyPalette('Palette13', randomColor(), randomColor(), randomColor(), randomColor()),
+    _MyPalette('Palette14', randomColor(), randomColor(), randomColor(), randomColor()),
+    _MyPalette('Palette15', randomColor(), randomColor(), randomColor(), randomColor()),
   ];
 
   @override
@@ -23,7 +34,10 @@ class _FavouritesState extends State<Favourites> {
         itemBuilder: (BuildContext context, int index) {
           return InkWell (
             onTap: () {
-              // do something
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => PopUpScreen()),
+              );
             },
             child: Container(
               height: 70,
@@ -42,6 +56,7 @@ class _FavouritesState extends State<Favourites> {
                         Box(palettes[index].color3),
                         Padding(padding: EdgeInsets.all(8.0)),
                         Box(palettes[index].color4),
+                        Padding(padding: EdgeInsets.all(8.0)),
                         Container(
                           child: IconButton(
                             padding: EdgeInsets.all(0),
@@ -60,12 +75,29 @@ class _FavouritesState extends State<Favourites> {
         },
     );
   }
-
-  // Function that removes a selected palette
+// Function that removes a selected palette
   void _removePalette (index) {
     setState((){
       palettes.removeAt(index);
     });
+  }
+}
+
+class PopUpScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: ElevatedButton(
+          child: InkWell(
+            onTap: () {
+              Navigator.pop(context);
+            }, // Handle your callback
+            child: Text('clicky'),
+          ),
+        )
+      )
+    );
   }
 }
 

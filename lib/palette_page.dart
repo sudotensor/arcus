@@ -30,7 +30,7 @@ class _PalettePageState extends State<PalettePage> {
         children: <Widget>[
           Spacer(),
           Row(
-            children: <Widget> [
+            children: <Widget>[
               Padding(padding: EdgeInsets.all(8.0)),
               Flexible(
                   flex: 1,
@@ -40,11 +40,13 @@ class _PalettePageState extends State<PalettePage> {
                       color: Colors.transparent,
                       child: Container(
                           decoration: BoxDecoration(
-                            color: widget.colors != null ? widget.colors[0] : Colors.transparent,
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(12),
-                            ),
-                          )))),
+                        color: widget.colors != null
+                            ? widget.colors[0]
+                            : Colors.transparent,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(12),
+                        ),
+                      )))),
               Flexible(
                   flex: 1,
                   child: Container(
@@ -53,11 +55,13 @@ class _PalettePageState extends State<PalettePage> {
                       color: Colors.transparent,
                       child: Container(
                           decoration: BoxDecoration(
-                            color: widget.colors != null ? widget.colors[2] : Colors.transparent,
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(12),
-                            ),
-                          )))),
+                        color: widget.colors != null
+                            ? widget.colors[2]
+                            : Colors.transparent,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(12),
+                        ),
+                      )))),
               Flexible(
                   flex: 1,
                   child: Container(
@@ -66,11 +70,13 @@ class _PalettePageState extends State<PalettePage> {
                       color: Colors.transparent,
                       child: Container(
                           decoration: BoxDecoration(
-                            color: widget.colors != null ? widget.colors[2] : Colors.transparent,
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(12),
-                            ),
-                          )))),
+                        color: widget.colors != null
+                            ? widget.colors[2]
+                            : Colors.transparent,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(12),
+                        ),
+                      )))),
               Flexible(
                   flex: 1,
                   child: Container(
@@ -79,16 +85,18 @@ class _PalettePageState extends State<PalettePage> {
                       color: Colors.transparent,
                       child: Container(
                           decoration: BoxDecoration(
-                            color: widget.colors != null ? widget.colors[3] : Colors.transparent,
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(12),
-                            ),
-                          )))),
+                        color: widget.colors != null
+                            ? widget.colors[3]
+                            : Colors.transparent,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(12),
+                        ),
+                      )))),
               Padding(padding: EdgeInsets.all(8.0)),
             ],
           ),
           Row(
-            children: <Widget> [
+            children: <Widget>[
               Padding(padding: EdgeInsets.all(8.0)),
               Flexible(
                   flex: 1,
@@ -104,7 +112,9 @@ class _PalettePageState extends State<PalettePage> {
                       ),
                       padding: EdgeInsets.symmetric(horizontal: 6),
                       child: FittedBox(
-                        child: Text('${slice(slice('${ColorToHex(widget.colors[0])}', 6), 1, -1)}', style: TextStyle(fontSize: 40)),
+                        child: Text(
+                            '${slice(slice('${ColorToHex(widget.colors[0])}', 6), 1, -1)}',
+                            style: TextStyle(fontSize: 40)),
                       ),
                     ),
                   )),
@@ -122,7 +132,9 @@ class _PalettePageState extends State<PalettePage> {
                       ),
                       padding: EdgeInsets.symmetric(horizontal: 6),
                       child: FittedBox(
-                        child: Text('${slice(slice('${ColorToHex(widget.colors[1])}', 6), 1, -1)}', style: TextStyle(fontSize: 40)),
+                        child: Text(
+                            '${slice(slice('${ColorToHex(widget.colors[1])}', 6), 1, -1)}',
+                            style: TextStyle(fontSize: 40)),
                       ),
                     ),
                   )),
@@ -140,7 +152,9 @@ class _PalettePageState extends State<PalettePage> {
                       ),
                       padding: EdgeInsets.symmetric(horizontal: 6),
                       child: FittedBox(
-                        child: Text('${slice(slice('${ColorToHex(widget.colors[2])}', 6), 1, -1)}', style: TextStyle(fontSize: 40)),
+                        child: Text(
+                            '${slice(slice('${ColorToHex(widget.colors[2])}', 6), 1, -1)}',
+                            style: TextStyle(fontSize: 40)),
                       ),
                     ),
                   )),
@@ -158,7 +172,9 @@ class _PalettePageState extends State<PalettePage> {
                       ),
                       padding: EdgeInsets.symmetric(horizontal: 6),
                       child: FittedBox(
-                        child: Text('${slice(slice('${ColorToHex(widget.colors[3])}', 6), 1, -1)}', style: TextStyle(fontSize: 40)),
+                        child: Text(
+                            '${slice(slice('${ColorToHex(widget.colors[3])}', 6), 1, -1)}',
+                            style: TextStyle(fontSize: 40)),
                       ),
                     ),
                   )),
@@ -170,11 +186,13 @@ class _PalettePageState extends State<PalettePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                width: MediaQuery.of(context).size.width*0.5,
-                child: TextField(
-                controller: nameController,
-              )
-              ),
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  child: TextField(
+                    decoration: InputDecoration(
+                      hintText: "Name"
+                    ),
+                    controller: nameController,
+                  )),
               Padding(padding: EdgeInsets.all(8.0)),
               FlatButton(
                 shape: RoundedRectangleBorder(

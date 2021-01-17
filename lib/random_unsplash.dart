@@ -76,9 +76,12 @@ class _RandomUnsplashState extends State<RandomUnsplash> {
             children: [
               new Builder(
                   builder: (BuildContext context) {
-                    // if(futureImg != null) {
-                    //   return Image.network(futureImg.url);
-                    // }
+                    if(futureImg != null) {
+                      return Container(
+                        height: MediaQuery.of(context).size.height*0.5,
+                        child: Image.network(futureImg.url, fit: BoxFit.fitHeight)
+                      );
+                    }
                     return Text('');
                   }
               ),

@@ -223,10 +223,15 @@ class GalleryAccessState extends State<GalleryAccess> {
                             ),
                           ),
                           onPressed: (){
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => PalettePage(primaryColors.colors)),
-                            );
+                            if(primaryColors != null) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) =>
+                                    PalettePage(primaryColors.colors)),
+                              );
+                            } else {
+                              Scaffold.of(context).showSnackBar(SnackBar(content: Text("No Image selected!")));
+                            }
                           },
                         ))
                 ),

@@ -57,6 +57,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/undraw_Organize_photos_re_ogcy.png
+    - assets/undraw_searching_p5ux.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

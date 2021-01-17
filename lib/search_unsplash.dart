@@ -70,7 +70,7 @@ class _SearchUnsplashState extends State<SearchUnsplash> {
               )),
           Container(
               width: MediaQuery.of(context).size.width * 0.25,
-              child: ElevatedButton(
+              child: FlatButton(
                 onPressed: () {
                   searchTerm = searchController.text;
                   for (var i = 0; i < _numImgs; i++) {
@@ -98,13 +98,15 @@ class _SearchUnsplashState extends State<SearchUnsplash> {
                           return Column(
                             children: [
                               Image.network(snapshot.data.url),
-                              ElevatedButton(
-                                style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
-                                ),
+                              FlatButton(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8.0)),
+                                color: Colors.black,
                                 child: new Text(
-                                  '                             Create New Palette                             ',
-                                  style: TextStyle(color: Colors.black.withOpacity(1),
+                                  'Create New Palette',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Colors.white.withOpacity(1),
                                   ),
                                 ),
                                 //onPressed: getImage,
@@ -139,13 +141,15 @@ class PalettePage extends StatelessWidget {
         title: Text("Palette Page"),
       ),
       body: Center(
-        child: ElevatedButton(
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
-          ),
+        child: FlatButton(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8.0)),
+          color: Colors.black,
           child: new Text(
-            '                             Go Back                              ',
-            style: TextStyle(color: Colors.black.withOpacity(1),
+            'Go back',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.white.withOpacity(1),
             ),
           ),
           onPressed: () {

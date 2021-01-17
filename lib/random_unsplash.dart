@@ -76,6 +76,7 @@ class _RandomUnsplashState extends State<RandomUnsplash> {
     return Container(
       padding: EdgeInsets.all(16.0),
       child: Column(
+        // child: Image.asset('assets/undraw_searching_p5ux'),
         children: [
           Column(
             children: [
@@ -239,13 +240,16 @@ class _RandomUnsplashState extends State<RandomUnsplash> {
                 ),
               ]
           ),
-          new ElevatedButton(
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all<Color>(Colors.lightBlue),
-            ),
+
+          new FlatButton(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.0)),
+            color: Colors.black,
             child: new Text(
-              '                           Generate New Palette                           ',
-              style: TextStyle(color: Colors.black.withOpacity(1),
+              'Generate New Palette',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.white.withOpacity(1),
               ),
             ),
             onPressed: () {

@@ -44,9 +44,14 @@ class _RandomUnsplashState extends State<RandomUnsplash> {
   var _primaryColorsLen = 4;
 
   status() async {
-    if(futureImg != null && primaryColors != null) {
+    if (futureImg != null && primaryColors != null) {
       setState(() {});
-    } else {
+    } else if(primaryColors == null && futureImg != null) {
+      Scaffold.of(context).showSnackBar(SnackBar(content: Text("Image too large, reloading...")));
+      refreshVars();
+      getImgData();
+      status();
+    }else {
       status();
     }
     return null;

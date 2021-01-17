@@ -5,7 +5,7 @@ import 'package:image_picker/image_picker.dart';
 class LocalImagePicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return GalleryAccess ();
+    return GalleryAccess();
   }
 }
 
@@ -15,6 +15,7 @@ class GalleryAccess extends StatefulWidget {
     return new GalleryAccessState();
   }
 }
+
 class GalleryAccessState extends State<GalleryAccess> {
   File galleryFile;
   final picker = ImagePicker();
@@ -23,9 +24,7 @@ class GalleryAccessState extends State<GalleryAccess> {
   Widget build(BuildContext context) {
     //display image selected from gallery
     Future getImage() async {
-      final pickedFile = await picker.getImage(
-          source: ImageSource.gallery
-      );
+      final pickedFile = await picker.getImage(source: ImageSource.gallery);
 
       setState(() {
         if (pickedFile != null) {
@@ -37,6 +36,7 @@ class GalleryAccessState extends State<GalleryAccess> {
     }
 
     return new Scaffold(
+      backgroundColor: Colors.white,
       body: new Builder(
         builder: (BuildContext context) {
           return Center(

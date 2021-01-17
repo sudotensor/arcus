@@ -26,6 +26,7 @@ class GalleryAccessState extends State<GalleryAccess> {
 
   getPalette() async {
     primaryColors = await fetchLocalPalette(galleryFile);
+    setState(() {});
     return null;
   }
 
